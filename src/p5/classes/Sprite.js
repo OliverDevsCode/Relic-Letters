@@ -84,6 +84,7 @@ export default class Sprite {
         console.log(`hitbox: ${hitbox.id} - detected`);
 
         if (hitbox.id === "house") {
+          //check if auth == true
           context.currentMap = context.indoorMap;
           context.currentCam = context.indoorCam;
           context.currentMapData = context.indoorData;

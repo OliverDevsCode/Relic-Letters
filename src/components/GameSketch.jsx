@@ -48,9 +48,7 @@ const GameSketch = React.memo(() => {
   }, []);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}>
-      <div ref={containerRef} className="canvas-wrapper-container" />
-    </div>
+    <div ref={containerRef} style={{ display: "block" }} />
   );
 });
 
