@@ -1,1 +1,83 @@
 
+/* Container that wraps your entire homepage view */
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 48px); /* Accounts for any default padding or margins */
+  padding: 40px 20px;
+  background-color: var(--bg-main); /* Earthy background from index.css */
+  box-sizing: border-box;
+}
+
+/* Styled heading matching a retro fantasy title screen */
+.homepage-container h1 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.5rem;
+  color: var(--text-heading); /* Antique gold color */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 30px;
+  
+  /* Thick retro block text shadow */
+  text-shadow: 3px 3px 0px #1a1211;
+  
+  /* Slight bounce animation for a classic arcade feel */
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* Wrapper around your GameSketch component canvas */
+.canvas-wrapper-container {
+  position: relative;
+  background-color: var(--panel-bg); /* Dark wood accent background */
+  padding: 12px;
+  
+  /* Retro double-line border framework */
+  border: 4px double var(--border);
+  
+  /* Hard pixel block shadow matching the game theme */
+  box-shadow: 8px 8px 0px #1a1211;
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle interactive lifting effect when hovering over the game wrapper */
+.canvas-wrapper-container:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0px #1a1211;
+}
+
+/* Decorative retro header flourish animations */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Responsive adjustments for smaller screens/laptops */
+@media (max-width: 768px) {
+  .homepage-container {
+    padding: 20px 10px;
+  }
+  
+  .homepage-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .canvas-wrapper-container {
+    padding: 6px;
+    border-width: 2px; /* Thinner border frames on small mobile grids */
+    box-shadow: 4px 4px 0px #1a1211;
+  }
+  
+  .canvas-wrapper-container:hover {
+    transform: none;
+    box-shadow: 4px 4px 0px #1a1211;
+  }
+}
