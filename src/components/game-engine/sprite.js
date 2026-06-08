@@ -26,6 +26,9 @@ class Sprite {
 
   moveUp(){
     this.direction ="up";
+    if(!this.checkCollision(0,-this.dy)){
+      return;
+    }
     this.y -= this.dy
     if(this.y < tile_size/2){
       this.y = tile_size/2
@@ -33,14 +36,23 @@ class Sprite {
   }
   moveRight(){
     this.direction ="right";
+    if(!this.checkCollision(this.dx,0)){
+      return;
+    }
     this.x += this.dx
   }
   moveLeft(){
     this.direction ="left";
+    if(!this.checkCollision(-this.dx,0)){
+      return;
+    }
     this.x -= this.dx
   }
   moveDown(){
     this.direction ="stand";
+    if(!this.checkCollision(0,this.dy)){
+      return;
+    }
     this.y += this.dy
     if(this.y > height - tile_size){
       this.y = height - tile_size
@@ -51,12 +63,25 @@ class Sprite {
     this.direction = "stand"
   }
 
-  checkCollision(){
-    //get tileX
-    //get tileY
-    const playerTileX = Math.floor((this.x)/(tile_size * scale));
-    const playerTileY = Math.floor((this.y)/(tile_size * scale));
-  }
+  /**
+   * 
+   * @param {*} dx 
+   * @param {*} dy 
+   * @returns true = empty space || false = full
+   */
+  checkCollision(dx, dy) {
+  const scaler = tile_size * scale;
+  
+  const nextTileX = Math.floor((this.x + dx) / scaler) + currentCam.x;
+  const nextTileY = Math.floor((this.y + dy) / scaler) + currentCam.y;
+
+  const hasCollision = currentMapData.objects.some(object => {
+    return object.tileX === nextTileX && object.tileY === nextTileY;
+  });
+
+  // Otherwise, return true (safe to move)
+  return !hasCollision;
+}
 
   checkIsHitBox(hitboxes) {
   // Scale the tolerance so it matches the actual visual size of the tiles on screen
@@ -68,7 +93,6 @@ class Sprite {
 
     const hitboxScreenX = worldX - (currentCam.x * (scale * tile_size));
     const hitboxScreenY = worldY - (currentCam.y * (scale * tile_size));
-    console.log(`hitboxScreenY: ${hitboxScreenY} || hitboxy: ${worldY}`)
     
     const playerScreenX = this.x
     const playerScreenY = this.y 
@@ -81,7 +105,7 @@ class Sprite {
       if (hitbox.id === "house") {
         currentMap = indoorMap;
         currentCam = indoorCam;
-        currentHitboxes = indoorData.hitboxes
+        currentMapData = indoorData
         
         this.x = 6 * (scale * tile_size); 
         this.y = 9 * (scale * tile_size);
@@ -89,7 +113,7 @@ class Sprite {
       else if (hitbox.id === "rug") {
         currentMap = outdoorMap;
         currentCam = outdoorCam;
-        currentHitboxes = outdoorData.hitboxes
+        currentMapData = outdoorData
 
         this.x = 6 * (scale * tile_size);
         this.y = 7 * (scale * tile_size);
@@ -98,6 +122,9 @@ class Sprite {
       }
       else if(hitbox.id === "chair"){
         console.log("open write component")
+      }
+      else if(hitbox.id === "postOffice"){
+        console.log("open postOffice component")
       }
     }
   });
@@ -133,7 +160,7 @@ class Sprite {
             this.stand(); 
         }
     }
-    this.checkIsHitBox(currentHitboxes);
+    this.checkIsHitBox(currentMapData.hitboxes);
 }
 
   draw(){

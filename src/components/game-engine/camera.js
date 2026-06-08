@@ -23,6 +23,9 @@ class Camera{
 
   moveLeft(){
     this.x -= this.dx;
+    if(this.x < 0){
+      this.x = 0;
+    }
   }
 
   moveRight(){
@@ -31,6 +34,9 @@ class Camera{
 
   moveUp(){
     this.y -= this.dy;
+    if(this.y < 0){
+      this.y = 0;
+    }
   }
 
   moveDown(){
@@ -42,10 +48,10 @@ class Camera{
    * @param {*} player - player obj to track
    */
   move(player){
-      const threshold = tile_size*2.5
+      const threshold = tile_size*scale*2.5
       if(player.x < threshold || player.x > width-threshold || player.y < threshold || player.y > height-threshold){
         //adjust camera
-        if(frameCount % 40 === 0){
+        if(frameCount % 15 === 0){
           // calculate x y components
           if(mouseX < width/2){
             if(mouseY < width/2){

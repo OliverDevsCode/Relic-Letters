@@ -1,0 +1,30 @@
+0,400,0,16,16 #blank
+1,32,32,16,16 #grass
+2,32,64,16,16 #grass-stone
+3,32,0,16,16 #stone-grass
+4,80,0,16,16 #stone
+5,96,0,16,16 #stone-2
+6,160,303,16,8 #flower
+7,100,214,58,64 # tree
+8,160,252,16,14 #flower-3
+9,128,0,72,102 #house
+26,159,226,16,13 #rock
+28,0,102,116,70 #house 2
+
+
+11,266,110,16,16 #wall corner-top-left
+12,266,121,16,15 #wall side-left
+13,266,144,16,16 #wall corner-bottom-left
+14,286,94,16,16 #wall top-middle
+15,286,112,16,16 #floor
+16,306,112,16,16 #wall corner-top-right
+17,306,121,16,15 #wall side-right
+18,306,144,16,16 #wall corner-bottom-right
+19,256,169,32,32 #bed
+20,288,179,30,22 #desk
+21,368,219,14,14 #chair
+22,401,153,27,15 #rug
+23,372,173,36,23 #rug-2
+24,338,187,12,14 #drawer
+25,288,212,12,21 #plant-indoor
+ 

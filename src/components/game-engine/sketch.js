@@ -24,7 +24,7 @@ let laserTex;
 //switching variables
 let currentMap;
 let currentCam;
-let currentHitboxes
+let currentMapData;
 
 
 function preload(){
@@ -39,20 +39,20 @@ function preload(){
 function setup() {
   cnv = createCanvas(400, 400);
   cnv.class('centered-canvas');
-  outdoorCam = new Camera(2,14,14);
+  outdoorCam = new Camera(1,14,14);
   indoorCam = new Camera(2,14,14);
   console.log("Tile map",tileMap)
   console.log("outdoorData",outdoorData)
   console.log("indoorData",indoorData)
   outdoorMap = new GameMap(texSheet,outdoorData,tileMap);
   indoorMap = new GameMap(texSheet,indoorData,tileMap);
-  mainSprite = new Sprite(50,50,sprite1Tex,5);
+  mainSprite = new Sprite(width/2,300,sprite1Tex,5);
   laserPointer = new Laser(laserTex);
 
   //default
   currentMap = outdoorMap;
   currentCam = outdoorCam;
-  currentHitboxes = outdoorData.hitboxes
+  currentMapData = outdoorData
 }
 
 function draw() {

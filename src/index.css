@@ -1,111 +1,107 @@
+/* src/index.css */
+
+/* 1. Global Custom Theme Variables mapping your retro wooden/parchment colors */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* Core Brand Colors */
+  --bg-main: #2b1f1d;          /* Deep rich wood/charcoal backdrop */
+  --panel-bg: #3d2f2b;         /* Warmer wood tone for panels and UI blocks */
+  --text-main: #e2d4b7;        /* Aged parchment cream text for readability */
+  --text-heading: #f4be6d;     /* Antique gold for title components */
+  --border: #5a453d;           /* Distressed muddy iron/wood trim outline */
+  
+  /* Game Context Accents */
+  --accent: #f47a9e;           /* Cat nose / Laser beam pink highlight */
+  --accent-bg: #4a2831;        /* Low-lit warm ruby backplate */
+  --accent-border: #ff9ebb;    /* High-visibility active neon laser glow */
+  --social-bg: #4d3c37;        /* Solid background for link boxes */
+  
+  /* Layout Structures */
+  --shadow: 4px 4px 0px #1a1211; /* Sharp pixel-art style drop shadow (no blurs) */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+/* 2. Global Resets and Engine Smoothing Handlers */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+  /* Critical for pixel art: prevents the browser from blurring your graphics */
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 body {
-  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  
+  /* Retro monospace typography stack */
+  font-family: 'Courier New', Courier, monospace;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+/* 3. Retro Headings Layout */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-heading);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #1a1211; /* Blocky text shadow for separation */
+  margin-bottom: 0.5em;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+/* 4. Link & Text Defaults */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: var(--accent-border);
   }
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
+
 p {
-  margin: 0;
+  margin-bottom: 1em;
+  color: var(--text-main);
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* 5. Custom Canvas UI Framework Injection */
+/* Automatically applies matching heavy borders and hard shadows onto your game canvas wrapper */
+.centered-canvas {
+  display: block;
+  border: 4px solid var(--border) !important;
+  box-shadow: var(--shadow);
+  background-color: #000000;
+  margin: 0 auto;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* Custom layout scrollbar to match the rustic interface */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border: 2px solid var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-heading);
 }
