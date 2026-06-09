@@ -1,18 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import p5 from "p5";
 import { gameEngine } from "../p5/engine";
-import AuthPopUp from "./AuthPopUp/AuthPopUp";
-import { useAuth } from "../contexts/authContext"; 
+import { useAuth } from "../contexts/authContext";
+import "./GameSketch.css";
 
-const GameSketch = React.memo(() => {
+const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
   const containerRef = useRef(null);
   const instanceRef = useRef(null);
   
   // Consuming custom Auth states
   const { userLoggedIn, currentUser } = useAuth();
-  
-  // UI Overlays state
-  const [activeModal, setActiveModal] = useState(null); 
 
   //  1. Create a mutable ref to hold the latest game action logic
   const gameActionRef = useRef(null);
@@ -52,12 +49,11 @@ const GameSketch = React.memo(() => {
         if (userLoggedIn) {
           setActiveModal("POST_OFFICE");
         } else {
-          // This will now reliably catch and launch instantly!
           setActiveModal("AUTH_REQUIRED");
         }
       }
     };
-  }, [userLoggedIn]); // Updates the internal ref function automatically when logging status swaps
+  }, [userLoggedIn, setActiveModal]);
 
   // 3. The canvas engine setup hook only runs once on component mount
   useEffect(() => {
@@ -67,7 +63,6 @@ const GameSketch = React.memo(() => {
       instanceRef.current = null;
     }
 
-    // A static proxy wrapper that passes commands directly through your dynamic ref structure
     const proxyGameAction = (event) => {
       if (gameActionRef.current) {
         gameActionRef.current(event);
@@ -91,37 +86,12 @@ const GameSketch = React.memo(() => {
       }
       if (containerRef.current) containerRef.current.innerHTML = "";
     };
-  }, []); // Empty dependencies mean the canvas never glitches or rebuilds unprompted!
+  }, []);
 
   return (
-    <div style={{ position: "relative" }}>
-      {/* 1. Standard Game Canvas Mount Node */}
+    <div style={{ position: "relative", display: "inline-block" }}>
+      {/* Game Canvas Mount Node - no modals here to prevent p5 interference */}
       <div ref={containerRef} style={{ display: "block" }} />
-
-      {/* 2. React UI Overlays */}
-      {activeModal === "AUTH_REQUIRED" && (
-        <AuthPopUp onClose={() => setActiveModal(null)} />
-      )}
-
-      {activeModal === "WRITE_COMPONENT" && (
-        <div className="retro-modal-overlay">
-          <div className="retro-modal-content">
-            <h2>Writing Desk</h2>
-            <textarea placeholder="Compose your rustic letter..." rows="5" style={{ width: "100%", fontFamily: "monospace" }} />
-            <button onClick={() => setActiveModal(null)} className="counter" style={{ marginTop: "10px" }}>Finish</button>
-          </div>
-        </div>
-      )}
-
-      {activeModal === "POST_OFFICE" && (
-        <div className="retro-modal-overlay">
-          <div className="retro-modal-content">
-            <h2>Post Office</h2>
-            <p>Welcome to the local sorting office!</p>
-            <button onClick={() => setActiveModal(null)} className="counter">Leave Office</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 });

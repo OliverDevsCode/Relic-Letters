@@ -107,7 +107,9 @@ export const gameEngine = (p,reactCallbacks = {}) => {
     ctx.currentMap.draw(ctx.currentCam, tile_size, scale);
     mainSprite.draw(tile_size, scale);
 
-    if (p.mouseIsPressed) {
+    const mouseInCanvas = p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height;
+    
+    if (p.mouseIsPressed && mouseInCanvas) {
       mainSprite.move();
       ctx.currentCam.move(mainSprite, tile_size, scale);
     }

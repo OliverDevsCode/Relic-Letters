@@ -1,0 +1,32 @@
+/* src/components/GameSketch.css */
+
+.retro-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  
+  /* Centers your wooden pop-up menu directly over the game canvas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Stops your text clicks from passing 'through' the box down to p5.js */
+  pointer-events: auto; 
+  
+  /* Optional: Dims the map canvas slightly so players focus on writing */
+  background-color: rgba(26, 18, 17, 0.5); 
+}
+
+.retro-modal-content {
+  position: relative;
+  background-color: var(--panel-bg);
+  border: 4px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}

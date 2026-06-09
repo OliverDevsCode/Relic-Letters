@@ -1,0 +1,66 @@
+/* src/components/popup/WritingPopUp.css */
+
+/* Darkened screen overlay to mask out background components */
+.writing-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(26, 18, 17, 0.85); /* Deep shadows matching theme tone */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensures it floats on top of dashboards/sidebars */
+}
+
+/* Modal window box container positioning */
+.writing-editor {
+  background-color: var(--panel-bg);
+  border: 4px double var(--border);
+  padding: 32px 24px;
+  max-width: 650px;
+  width: 90%;
+  box-shadow: var(--shadow);
+  position: relative; /* Allows close button positioning alignment hooks */
+  text-align: center;
+}
+
+/* Prompt headers styling */
+.writing-title {
+  color: var(--text-heading);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-shadow: 2px 2px 0px #1a1211;
+}
+
+.writing-subtitle {
+  color: #7a635a;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* Top corner quick-exit layout element */
+.close-popup-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #7a635a;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-popup-btn:hover {
+  color: var(--accent);
+}
