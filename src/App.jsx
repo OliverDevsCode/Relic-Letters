@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from './components/homePage/homePage' 
+import HomePage from './components/HomePage/HomePage' 
 import { AuthProvider } from './contexts/authContext';
 
 function App() {
