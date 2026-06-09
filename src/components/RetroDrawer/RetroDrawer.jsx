@@ -1,7 +1,7 @@
 import React from "react";
 import './RetroDrawer.css';
 
-const RetroDrawer = ({ isOpen, letters = [], onSelectLetter }) => {
+const RetroDrawer = ({ isOpen, letters = [], onSelectLetter,close }) => {
   return (
     <div className={`drawer-housing ${isOpen ? 'open' : ''}`}>
       
@@ -31,7 +31,7 @@ const RetroDrawer = ({ isOpen, letters = [], onSelectLetter }) => {
       </div>
 
       <div className="drawer-faceplate">
-        <div className="pixel-brass-handle"></div>
+        <div className="pixel-brass-handle" onClick={close}></div>
       </div>
 
     </div>

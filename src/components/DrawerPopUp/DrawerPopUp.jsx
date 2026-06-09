@@ -3,6 +3,7 @@ import './DrawerPopUp.css'
 import { useAuth } from '../../contexts/authContext';
 import { getRecievedLetters,getUserDoc } from '../../utils/userDB';
 import { RetroDrawer } from '../RetroDrawer/RetroDrawer';
+import LetterPopUp from '../LetterPopUp/LetterPopUp';
 
 
 const DrawerPopUp = ({finished}) => {
@@ -12,6 +13,7 @@ const DrawerPopUp = ({finished}) => {
   const [username,setUsername] = useState('UNKNOWN');
   const [recievedLetters,setRecievedLetters] = useState([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const [selectedLetter,setSelectedLetter] = useState({});
 
   useEffect(()=>{
     async function fetchUserData(){
@@ -31,7 +33,13 @@ const DrawerPopUp = ({finished}) => {
   },[userId])
 
   const handleSelectLetter = (id) => {
-    console.log("Inspecting received parchment:", id);
+    console.log("opening letter:", id);
+    for (let index = 0; index < recievedLetters.length; index++) {
+      const letter = recievedLetters[index];
+      if(letter.letterId === id){
+        setSelectedLetter(letter);
+      } 
+    }
     // You can handle opening the text layout view here!
   };
 
@@ -42,18 +50,20 @@ const DrawerPopUp = ({finished}) => {
     }, 200); // Matches your 0.2s CSS transition length!
   };
 
+  const handleCloseLetter = () => {
+    setSelectedLetter(null);
+  };
+
   return (
     <div className='drawer-pop-up-backdrop'>
-      <div className='drawer-text-header'>
-        <p>Welcome back, {username}.</p>
-        <p>Enjoy your collection!</p>
-        <button className="drawer-close-btn" onClick={handleCloseDrawer}>✕ CLOSE CABINET</button>
-      </div>
-
+      {selectedLetter && (
+        <LetterPopUp letter={selectedLetter} closeLetter={handleCloseLetter}/>
+      )}
       <RetroDrawer 
         isOpen={isDrawerOpen} 
         letters={recievedLetters} 
         onSelectLetter={handleSelectLetter}
+        close={finished}
       />
     </div>
   );

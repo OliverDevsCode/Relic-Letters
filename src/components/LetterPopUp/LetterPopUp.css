@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* Modal Backdrop */
+.letter-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(15, 12, 10, 0.8) !important; /* Slightly darker overlay to make the yellow paper pop */
+  backdrop-filter: blur(5px) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 999999 !important; 
+}
+
+.letter-container {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+  animation: floatIn 0.35s ease-out;
+}
+
+/* --- THE VINTAGE PAPER --- */
+.letter-paper {
+  /* Warm vintage off-white / yellow tone */
+  background-color: #f7eecf !important; 
+  
+  /* Subtle horizontal notebook/lined paper look that blends with the yellow background */
+  background-image: linear-gradient(rgba(180, 160, 120, 0.15) 1px, transparent 1px) !important;
+  background-size: 100% 26px;
+  
+  padding: 50px 55px !important;
+  border-radius: 4px !important;
+  
+  /* Heavy shadows to make the paper feel physically raised above the retro drawer layout */
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.5), 
+    inset 0 0 60px rgba(184, 154, 106, 0.2) !important; /* Internal vignette for aging effect */
+  
+  font-family: 'Playfair Display', Georgia, serif !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* Header / Date alignment */
+.letter-paper .letter-header {
+  text-align: right !important;
+  margin-bottom: 25px !important;
+}
+
+.letter-paper .letter-date {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-style: italic !important;
+  font-size: 1rem !important;
+  color: #705b45 !important; /* Muted sepia ink color */
+  text-shadow: none !important; 
+}
+
+/* Title / Subject lines */
+.letter-paper .letter-main-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  color: #3d3023 !important; /* Deep dark brown ink */
+  font-size: 1.6rem !important;
+  font-weight: 600 !important;
+  text-shadow: none !important; 
+  text-transform: none !important;
+  text-align: left !important;
+  margin: 0 0 25px 0 !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid rgba(112, 91, 69, 0.3) !important; /* Sepia divider line */
+}
+
+/* Content Body */
+.letter-paper .letter-content {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  color: #403226 !important; /* Dark legible ink */
+  font-size: 1.15rem !important;
+  text-shadow: none !important;
+  line-height: 1.62 !important;
+  white-space: pre-wrap !important;
+  text-align: left !important;
+  margin-top: 10px !important;
+}
+
+/* Sign-off Styling */
+.letter-paper .letter-footer {
+  margin-top: 45px !important;
+  text-align: right !important;
+}
+
+.letter-paper .letter-valediction {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  color: #403226 !important;
+  font-size: 1.1rem !important;
+  text-shadow: none !important;
+  margin-bottom: 5px !important;
+}
+
+.letter-paper .letter-sender {
+  font-family: 'Dancing Script', cursive !important;
+  color: #16263b !important; /* Classic dark fountain-pen blue ink */
+  font-size: 2rem !important;
+  text-shadow: none !important;
+  text-transform: none !important;
+  margin: 0 !important;
+  font-weight: normal !important;
+}
+
+/* Close Button (outside paper bounds) */
+.close-letter-btn {
+  position: absolute !important;
+  top: -40px !important;
+  right: -5px !important;
+  background: none !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-size: 2.5rem !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+  transition: transform 0.2s !important;
+}
+
+.close-letter-btn:hover {
+  transform: scale(1.1) !important;
+}
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
