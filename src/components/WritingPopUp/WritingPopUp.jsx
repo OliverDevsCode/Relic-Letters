@@ -106,7 +106,7 @@ const WritingPopUp = ({ finished }) => {
         <p className='writing-subtitle'>Write below</p>
         
         <RetroEditor 
-          placeholder="TYPE YOUR MESSAGE OR LOG ENTRY HERE..." 
+          placeholder="USE YOUR IMAGINATION..." 
           onSave={handleSaveEntry} 
           title={title}
           setTitle = {setTitle}

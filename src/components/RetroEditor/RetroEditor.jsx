@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RetroEditor.css';
 
-const RetroEditor = ({ onSave, placeholder = "WRITE YOUR LEGEND HERE...", title,setTitle,content,setContent,handleLoadEntry}) => {
+const RetroEditor = ({ onSave, placeholder = "USE YOUR IMAGINATION...", title,setTitle,content,setContent,handleLoadEntry}) => {
   const [charCount, setCharCount] = useState(0);
 
   const handleTextChange = (e) => {
