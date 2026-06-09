@@ -41,7 +41,7 @@ const HomePage = () => {
           )}
 
           {activeModal === "POSTCAT_COMPONENT" && (
-            <PostCatPopUp finished={() => setActiveModal(null)}></PostCatPopUp>
+            <PostCatPopUp onClose={() => setActiveModal(null)}></PostCatPopUp>
           )}
         </div>
       )}
