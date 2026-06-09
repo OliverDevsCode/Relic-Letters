@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import p5 from "p5";
 import { gameEngine } from "../p5/engine";
-import AuthPopup from "./AuthPopUp/AuthPopup";
+import AuthPopUp from "./AuthPopUp/AuthPopUp";
 import { useAuth } from "../contexts/authContext"; 
 
 const GameSketch = React.memo(() => {
@@ -100,7 +100,7 @@ const GameSketch = React.memo(() => {
 
       {/* 2. React UI Overlays */}
       {activeModal === "AUTH_REQUIRED" && (
-        <AuthPopup onClose={() => setActiveModal(null)} />
+        <AuthPopUp onClose={() => setActiveModal(null)} />
       )}
 
       {activeModal === "WRITE_COMPONENT" && (

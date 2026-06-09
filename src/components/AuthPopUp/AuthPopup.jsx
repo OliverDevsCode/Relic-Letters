@@ -3,7 +3,7 @@ import LoginCard from '../LoginCard/LoginCard'
 import SignUpCard from '../SignUpCard/SignUpCard'
 import './AuthPopup.css' // Ensure the CSS is explicitly linked!
 
-const AuthPopup = ({ onClose }) => {
+const AuthPopUp = ({ onClose }) => {
   return (
     /* 1. Backdrop container anchoring the layout position context */
     <div className="retro-modal-overlay">
@@ -33,4 +33,4 @@ const AuthPopup = ({ onClose }) => {
   )
 }
 
-export default AuthPopup
+export default AuthPopUp
