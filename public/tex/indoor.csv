@@ -16,7 +16,7 @@
 # ID,tile x,tile y
 19,4,4       # bed (Tucked into the top-left of the room)
 22,4,5       # rug (Beside the bed)
-24,7,3       # drawer (Against the back wall)
+24,6,3       # drawer (Against the back wall)
 20,8,3       # desk (Next to drawer)
 21,8,4       # chair (Tucked in at desk)
 25,9,3       # plant-indoor (Top-right corner)
@@ -25,3 +25,4 @@
 #HITBOXES
 rug,6,10
 chair,8,4
+drawer,6,4

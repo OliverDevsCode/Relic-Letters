@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import GameSketch from '../GameSketch' 
 import AuthPopUp from '../AuthPopUp/AuthPopUp'
-import WritingPopUp from '../WritingPopUp/WritingPopUp'
+import WritingPopUp from '../WritingPopUp/WritingPopUp';
+import DrawerPopUp from '../DrawerPopUp/DrawerPopUp';
 import './HomePage.css'
 
 const HomePage = () => {
@@ -32,6 +33,10 @@ const HomePage = () => {
 
           {activeModal === "WRITE_COMPONENT" && (
             <WritingPopUp finished={() => setActiveModal(null)}/>
+          )}
+
+          {activeModal === "DRAWER_COMPONENT" && (
+            <DrawerPopUp finished={() => setActiveModal(null)}/>
           )}
 
           {activeModal === "POST_OFFICE" && (

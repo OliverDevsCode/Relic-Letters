@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RetroEditor.css';
 
-const RetroEditor = ({ onSave, placeholder = "WRITE YOUR LEGEND HERE..." }) => {
+const RetroEditor = ({ onSave, placeholder = "WRITE YOUR LEGEND HERE...", title,setTitle}) => {
   const [content, setContent] = useState('');
   const [charCount, setCharCount] = useState(0);
 
@@ -10,6 +10,11 @@ const RetroEditor = ({ onSave, placeholder = "WRITE YOUR LEGEND HERE..." }) => {
     setContent(text);
     setCharCount(text.length);
   };
+
+  const updateTitleChange =(e) =>{
+    const text = e.target.value;
+    setTitle(text);
+  }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -26,6 +31,17 @@ const RetroEditor = ({ onSave, placeholder = "WRITE YOUR LEGEND HERE..." }) => {
       </div>
       
       <form onSubmit={handleFormSubmit} className="editor-form">
+        <input
+          type="text"
+          className="retro-title-input"
+          placeholder="ENTER TITLE..."
+          value={title}
+          onChange={updateTitleChange}
+          maxLength={100}
+          name="journal-title"
+          autoComplete="off"
+          spellCheck="false"
+        />
         <textarea
           className="retro-textarea"
           placeholder={placeholder}

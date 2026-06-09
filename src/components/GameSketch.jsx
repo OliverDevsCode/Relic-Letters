@@ -44,6 +44,10 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
       if (event.type === "OPEN_WRITE_INTERFACE") {
         setActiveModal("WRITE_COMPONENT");
       }
+
+      if (event.type === "OPEN_DRAWER_INTERFACE") {
+        setActiveModal("DRAWER_COMPONENT");
+      }
       
       if (event.type === "OPEN_POST_OFFICE") {
         if (userLoggedIn) {

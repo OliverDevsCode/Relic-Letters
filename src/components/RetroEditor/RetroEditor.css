@@ -36,6 +36,22 @@
   gap: 12px;
 }
 
+.retro-title-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: var(--bg-main);
+  color: var(--text-heading); /* Stands out slightly more than main body text */
+  border: 2px solid var(--border);
+  border-radius: 0px; /* Kept sharp corners theme style intact */
+  outline: none;
+  box-sizing: border-box;
+  text-transform: uppercase; /* Automatically forces visual upper-casing for titles */
+  transition: all 0.2s ease;
+}
+
 /* The actual text entry grid system */
 .retro-textarea {
   width: 100%;

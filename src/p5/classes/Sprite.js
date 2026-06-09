@@ -100,6 +100,11 @@ export default class Sprite {
           context.onTriggerAction({ type: "OPEN_WRITE_INTERFACE" });
         }
       }
+      else if (hitbox.id === "drawer") {
+        if (context.onTriggerAction) {
+          context.onTriggerAction({ type: "OPEN_DRAWER_INTERFACE" });
+        }
+      }
       else if (hitbox.id === "postOffice") {
         if (context.onTriggerAction) {
           context.onTriggerAction({ type: "OPEN_POST_OFFICE" });
