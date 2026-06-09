@@ -32,6 +32,52 @@ async function createUser(userObj) {
   }
   
 }
+
+/**
+ * Gets letter from user
+ * @param {*} userId 
+ */
+async function getDraftLetters(userId) {
+  if (!userId) return [];
+
+  try {
+    // 1. Reference the user's private letters subcollection
+    const userLettersRef = collection(db, "users", userId, "letters");
+    
+    // 2. Build the query to filter by status AND sort chronologically
+    const q = query(
+      userLettersRef,
+      where("status", "==", "writing"),
+      orderBy("date", "desc")
+    );
+    
+    // 3. Execute the fetch
+    const querySnapshot = await getDocs(q);
+    
+    // 4. Format the documents into clean objects with their autoIds
+    const draftsArray = querySnapshot.docs.map(docSnap => ({
+      letterId: docSnap.id, // Keep the ID for updating the draft later!
+      ...docSnap.data()
+    }));
+
+    console.log(`Fetched ${draftsArray.length} active drafts.`);
+    return draftsArray;
+
+  } catch (error) {
+    console.error("Error fetching draft letters:", error);
+    return false;
+  }
+}
+
+/**
+ * Gets letters sent to user
+ * @param {*} userId 
+ */
+async function getRecievedLetters(userId) {
+  
+}
+
+
 /**
  * Add letter to user account
  * Letter = STILL BEING WRITTEN
@@ -110,4 +156,4 @@ async function getUserDoc(userId) {
 }
 
 
-export {createUser,saveLetter,sendLetter,getUserDoc};
+export {createUser,saveLetter,sendLetter,getUserDoc,getDraftLetters};

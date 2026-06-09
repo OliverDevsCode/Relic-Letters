@@ -1,0 +1,54 @@
+/* src/components/LetterCard/LetterCard.css */
+
+.letter-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Spaced evenly across the row */
+  gap: 16px;
+  background-color: var(--bg-main); /* Slightly lighter background than the tray */
+  border: 2px solid var(--border);
+  padding: 10px 14px;
+  box-sizing: border-box;
+}
+
+/* Base text layout for all paragraphs inside the card row */
+.letter-card p {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  color: var(--text-body);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Cleanly cuts off text with '...' if title is too long */
+}
+
+/* Make the title take up the remaining space and stand out more */
+.letter-card p:first-of-type {
+  font-weight: bold;
+  color: var(--text-heading);
+  flex-grow: 1; 
+  text-transform: uppercase;
+}
+
+/* The Open Button */
+.letter-card button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  background-color: var(--accent); /* Your action accent color */
+  color: white;
+  border: 2px solid var(--border);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.letter-card button:hover {
+  background-color: var(--text-heading);
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0px var(--border);
+}
+
+.letter-card button:active {
+  transform: translate(0, 0);
+  box-shadow: 0px 0px 0px var(--border);
+}

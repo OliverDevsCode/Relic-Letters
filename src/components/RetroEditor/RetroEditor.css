@@ -97,7 +97,8 @@
 }
 
 /* Neon Action Submit Command */
-.editor-save-btn {
+.editor-save-btn,
+.editor-load-btn {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   font-size: 14px;
@@ -113,7 +114,8 @@
   transition: all 0.2s ease;
 }
 
-.editor-save-btn:hover {
+.editor-save-btn:hover,
+.editor-load-btn:hover {
   background-color: var(--accent);
   color: #1a1211;
   transform: translate(-1px, -1px);

@@ -1,0 +1,72 @@
+
+/* src/components/LetterTray/LetterTray.css */
+
+.letter-tray {
+  /* 1. Force it to hover absolutely within the backdrop window */
+  position: absolute; 
+  
+  /* 2. Position it perfectly dead center, sitting above the editor */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* 3. Set this higher than the editor's depth level */
+  z-index: 10010; 
+
+  /* Keep your excellent retro styles intact */
+  background-color: var(--panel-bg); 
+  border: 4px double var(--border); 
+  padding: 20px;
+  max-width: 500px;
+  width: 90%; /* Responsive sizing for smaller viewports */
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.85); /* Heavy shadow to separate layers */
+  display: flex;
+  flex-direction: column;
+  gap: 14px; 
+  box-sizing: border-box;
+}
+
+/* Tray Heading Label (e.g., "Previous Letters") */
+.letter-tray > p {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-heading);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 4px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed var(--border); /* Perforated scroll-cut look */
+  text-shadow: 2px 2px 0px #1a1211;
+  
+  /* Decorative elements matching old retro terminal interfaces */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Scrollbar customization if the tray gets packed with too many letters */
+.letter-tray-scrollable {
+  max-height: 450px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Custom retro styling for webkit scrollbars */
+.letter-tray::-webkit-scrollbar {
+  width: 8px;
+}
+
+.letter-tray::-webkit-scrollbar-track {
+  background: var(--bg-main);
+  border-left: 2px solid var(--border);
+}
+
+.letter-tray::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 0px;
+}
+
+.letter-tray::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}

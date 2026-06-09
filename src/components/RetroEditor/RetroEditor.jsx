@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './RetroEditor.css';
 
-const RetroEditor = ({ onSave, placeholder = "WRITE YOUR LEGEND HERE...", title,setTitle}) => {
-  const [content, setContent] = useState('');
+const RetroEditor = ({ onSave, placeholder = "WRITE YOUR LEGEND HERE...", title,setTitle,content,setContent,handleLoadEntry}) => {
   const [charCount, setCharCount] = useState(0);
 
   const handleTextChange = (e) => {
@@ -55,6 +54,9 @@ const RetroEditor = ({ onSave, placeholder = "WRITE YOUR LEGEND HERE...", title,
         
         <div className="editor-footer">
           <span className="char-counter">Character remaining: {charCount}/1000</span>
+          <button type="button" className="editor-load-btn" onClick={handleLoadEntry}>
+            Load Letter
+          </button>
           <button type="submit" className="editor-save-btn">
             Save Letter
           </button>
