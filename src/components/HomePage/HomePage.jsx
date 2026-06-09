@@ -3,6 +3,7 @@ import GameSketch from '../GameSketch'
 import AuthPopUp from '../AuthPopUp/AuthPopUp'
 import WritingPopUp from '../WritingPopUp/WritingPopUp';
 import DrawerPopUp from '../DrawerPopUp/DrawerPopUp';
+import PostCatPopUp from '../PostCatPopUp/PostCatPopUp';
 import './HomePage.css'
 
 const HomePage = () => {
@@ -39,14 +40,8 @@ const HomePage = () => {
             <DrawerPopUp finished={() => setActiveModal(null)}/>
           )}
 
-          {activeModal === "POST_OFFICE" && (
-            <div className="retro-modal-overlay">
-              <div className="retro-modal-content">
-                <h2>Post Office</h2>
-                <p>Welcome to the local sorting office!</p>
-                <button onClick={() => setActiveModal(null)} className="counter">Leave Office</button>
-              </div>
-            </div>
+          {activeModal === "POSTCAT_COMPONENT" && (
+            <PostCatPopUp finished={() => setActiveModal(null)}></PostCatPopUp>
           )}
         </div>
       )}

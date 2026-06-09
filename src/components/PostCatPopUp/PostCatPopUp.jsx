@@ -1,0 +1,62 @@
+import React, { useState } from 'react';
+import './PostCatPopUp.css';
+
+const PostCatPopUp = ({ onClose, onPostLetter, onCheckPost }) => {
+  const [prioSpeech, setPrioSpeech] = useState("Please choose from the following");
+
+  const handlePostClick = () => {
+    setPrioSpeech("Purr-fect! Let's get that letter sorted.");
+    setTimeout(() => {
+      if (onPostLetter) onPostLetter();
+    }, 800);
+  };
+
+  const handleCheckClick = () => {
+    setPrioSpeech("Let me check the cubbyholes for you...");
+    setTimeout(() => {
+      if (onCheckPost) onCheckPost();
+    }, 800);
+  };
+
+  return (
+    <div className='post-cat-backdrop'>
+      <div className='post-cat-editor'>
+        {/* Top corner quick-exit layout element */}
+        <button className='close-popup-btn' onClick={onClose}>
+          X
+        </button>
+
+        <h1 className='post-cat-title'>Welcome to my purrst office!</h1>
+        <h2 className='post-cat-subtitle'>My name is Prio</h2>
+        
+        {/* Prio the Cat Visual Element */}
+        <div className='post-cat-avatar-container'>
+          <img 
+            src="/postcat.gif" 
+            alt="Prio the Post Office Cat" 
+            className='post-cat-gif'
+            onError={(e) => {
+              e.target.style.display = 'none';
+              console.error("Could not find postcat.gif in public folder");
+            }}
+          />
+        </div>
+
+        {/* Dynamic Dialogue Prompt Text */}
+        <p className='post-cat-speech'>{prioSpeech}</p>
+        
+        {/* Action Controls */}
+        <div className='post-cat-actions'>
+          <button className='post-cat-btn' onClick={handlePostClick}>
+            ✉️ Post Letter
+          </button>
+          <button className='post-cat-btn' onClick={handleCheckClick}>
+            📦 Check Post
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PostCatPopUp;

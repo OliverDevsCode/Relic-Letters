@@ -1,0 +1,116 @@
+/* src/components/popup/PostCatPopUp.css */
+
+/* Darkened screen overlay to mask out background components */
+.post-cat-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(26, 18, 17, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* The popup backdrop layer */
+}
+
+/* Modal window box container positioning */
+.post-cat-editor {
+  background-color: var(--panel-bg);
+  border: 4px double var(--border);
+  padding: 32px 24px;
+  max-width: 500px; /* Slightly narrower than editor to fit the cat theme snugly */
+  width: 90%;
+  box-shadow: var(--shadow);
+  position: relative; /* Allows close button positioning alignment hooks */
+  text-align: center;
+}
+
+/* Prompt headers styling */
+.post-cat-title {
+  color: var(--text-heading);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-shadow: 2px 2px 0px #1a1211;
+}
+
+.post-cat-subtitle {
+  color: #7a635a;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* Cat Asset Container Alignment */
+.post-cat-avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.post-cat-gif {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated; /* Essential to keep retro game art crisp */
+}
+
+/* Speech Text Body styling matching system fonts */
+.post-cat-speech {
+  color: var(--text-heading);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 24px;
+  min-height: 24px; /* Layout guard against text swapping jitter */
+}
+
+/* Bottom Action Layout Control Groups */
+.post-cat-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* Core Buttons mimicking your UI system theme inputs */
+.post-cat-btn {
+  background-color: #1a1211;
+  color: var(--text-heading);
+  border: 2px solid var(--border);
+  padding: 10px 16px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.post-cat-btn:hover {
+  background-color: var(--accent);
+  color: #1a1211;
+  border-color: #1a1211;
+}
+
+/* Top corner quick-exit layout element */
+.post-cat-editor .close-popup-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #7a635a;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.post-cat-editor .close-popup-btn:hover {
+  color: var(--accent);
+}

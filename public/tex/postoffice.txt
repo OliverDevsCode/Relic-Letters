@@ -1,0 +1,14 @@
+0,103,103,16,16 #blank
+1,32,32,32,32 #bookshelf
+2,64,40,64,32 #table
+3,0,80,16,16 #drawer
+4,64,80,24,22 #desk
+5,16,117,16,16 #wood floor
+6,0,117,16,16 #stonefloor
+7,32,117,11,11 #books stacked
+8,44,117,13,9 #book
+9,114,33,16,16 #plant
+10,135,79,16,16 #cat
+12,130,28,16,14 #wall side-left
+14,153,0,16,16 #wall top-middle
+17,172,28,16,13 #wall side-right

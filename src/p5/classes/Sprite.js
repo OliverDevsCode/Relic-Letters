@@ -55,9 +55,24 @@ export default class Sprite {
     const nextTileX = Math.floor((this.x + dx) / scaler) + context.currentCam.x;
     const nextTileY = Math.floor((this.y + dy) / scaler) + context.currentCam.y;
 
-    const hasCollision = context.currentMapData.objects.some(object => {
+    let hasCollision = context.currentMapData.objects.some(object => {
       return object.tileX === nextTileX && object.tileY === nextTileY;
     });
+
+    const terrain = context.currentMapData.terrain
+
+    //check - if outside of range teleport back
+    if(nextTileY < 0 || nextTileY >= terrain.length || nextTileX < 0|| nextTileX >= terrain[0].length){
+      this.x = scaler * 5;
+      this.y = scaler * 7;
+      this.stand();
+      return false;
+    }
+    const nextTerrainTile = terrain[nextTileY][nextTileX]
+    if(nextTerrainTile === 0 ||nextTerrainTile === 17 || nextTerrainTile === 14 || nextTerrainTile === 12){
+        hasCollision = true;
+      }
+
 
     return !hasCollision;
   }
@@ -110,6 +125,11 @@ export default class Sprite {
           context.onTriggerAction({ type: "OPEN_POST_OFFICE" });
         }
       }
+      else if (hitbox.id === "postcat") {
+        if (context.onTriggerAction) {
+          context.onTriggerAction({ type: "OPEN_POST_OPTIONS" });
+        }
+      }
         else if (hitbox.id === "rug") {
           context.currentMap = context.outdoorMap;
           context.currentCam = context.outdoorCam;
@@ -117,8 +137,8 @@ export default class Sprite {
 
           this.x = 6 * (scale * tile_size);
           this.y = 7 * (scale * tile_size);
-          context.outdoorCam.x = 0;
-          context.outdoorCam.y = 0;
+          // context.outdoorCam.x = 0;
+          // context.outdoorCam.y = 0;
         }
       }
     });

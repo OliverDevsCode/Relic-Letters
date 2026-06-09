@@ -10,13 +10,14 @@ export const gameEngine = (p,reactCallbacks = {}) => {
   const scale = 2;
 
   // Runtime Scope Variables
-  let outdoorCam, indoorCam;
-  let outdoorMap, indoorMap;
+  let outdoorCam, indoorCam, postOfficeCam;
+  let outdoorMap, indoorMap, postOfficeMap;
   let mainSprite, laserPointer;
-  let texSheet, sprite1Tex, laserTex;
+  let texSheet, sprite1Tex, laserTex,postOfficeTex;
   
   let tileMap = {};
-  let outdoorData, indoorData;
+  let postOfficeTileMap = {};
+  let outdoorData, indoorData,postOfficeData;
 
   // Bridge reference objects to make collisions dynamic
   p._gameEngineContext = {
@@ -45,34 +46,45 @@ export const gameEngine = (p,reactCallbacks = {}) => {
       loadedTexSheet, 
       loadedSpriteTex, 
       loadedLaserTex, 
+      loadedPostOfficTex,
       atlasLines, 
+      postOfficeAtlasLines,
       outdoorLines, 
-      indoorLines
+      indoorLines,
+      postOfficeLines
     ] = await Promise.all([
       p.loadImage('/tex/combined.png'),
       p.loadImage('/tex/cat.png'),
       p.loadImage('/tex/laser.png'),
+      p.loadImage('/tex/postoffice.png'),
       p.loadStrings('/tex/atlas.txt'),
+      p.loadStrings('/tex/postoffice.txt'),
       p.loadStrings('/tex/outdoor.csv'),
-      p.loadStrings('/tex/indoor.csv')
+      p.loadStrings('/tex/indoor.csv'),
+      p.loadStrings('/tex/postoffice.csv'),
     ]);
 
     //Assign files to scope references
     texSheet = loadedTexSheet;
     sprite1Tex = loadedSpriteTex;
     laserTex = loadedLaserTex;
+    postOfficeTex = loadedPostOfficTex;
 
     // Pass text array responses directly to your utility parsers
-    parseTileFile(atlasLines, tileMap);
+    tileMap = parseTileFile(atlasLines);
+    postOfficeTileMap = parseTileFile(postOfficeAtlasLines);
     outdoorData = parseMapFile(outdoorLines);
     indoorData = parseMapFile(indoorLines);
+    postOfficeData = parseMapFile(postOfficeLines);
 
     //Instantiate constructors using newly hydrated configurations
     outdoorCam = new Camera(p, 1, 14, 14);
     indoorCam = new Camera(p, 2, 14, 14);
+    postOfficeCam = new Camera(p, 2, 14, 14);
 
     outdoorMap = new GameMap(p, texSheet, outdoorData, tileMap);
     indoorMap = new GameMap(p, texSheet, indoorData, tileMap);
+    postOfficeMap = new GameMap(p, postOfficeTex, postOfficeData, postOfficeTileMap);
 
     mainSprite = new Sprite(p, p.width / 2, 300, sprite1Tex, 5);
     laserPointer = new Laser(p, laserTex);
@@ -80,10 +92,13 @@ export const gameEngine = (p,reactCallbacks = {}) => {
     // Hydrate Context engine
     p._gameEngineContext.outdoorCam = outdoorCam;
     p._gameEngineContext.indoorCam = indoorCam;
+    p._gameEngineContext.postOfficeCam = postOfficeCam;
     p._gameEngineContext.outdoorMap = outdoorMap;
     p._gameEngineContext.indoorMap = indoorMap;
+    p._gameEngineContext.postOfficeMap = postOfficeMap;
     p._gameEngineContext.outdoorData = outdoorData;
     p._gameEngineContext.indoorData = indoorData;
+    p._gameEngineContext.postOfficeData = postOfficeData;
 
     // Apply defaults
     p._gameEngineContext.internalMap = outdoorMap;

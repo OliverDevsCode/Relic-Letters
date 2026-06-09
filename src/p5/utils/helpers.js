@@ -1,4 +1,6 @@
-export function parseTileFile(linesArray, targetTileMap) {
+export function parseTileFile(linesArray) {
+  const tileMap = {};
+
   for (let line of linesArray) {
     line = line.trim();
     if (line === '') continue;
@@ -12,7 +14,7 @@ export function parseTileFile(linesArray, targetTileMap) {
     if (values.length >= 5) {
       let id = values[0];
       
-      targetTileMap[id] = {
+      tileMap[id] = {
         id: id,
         x: values[1],
         y: values[2],
@@ -22,6 +24,8 @@ export function parseTileFile(linesArray, targetTileMap) {
       };
     }
   }
+
+  return tileMap;
 }
 
 /**

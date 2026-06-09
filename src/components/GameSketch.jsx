@@ -48,10 +48,37 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
       if (event.type === "OPEN_DRAWER_INTERFACE") {
         setActiveModal("DRAWER_COMPONENT");
       }
+
+      if (event.type === "OPEN_POST_OPTIONS") {
+        setActiveModal("POSTCAT_COMPONENT");
+      }
       
       if (event.type === "OPEN_POST_OFFICE") {
         if (userLoggedIn) {
-          setActiveModal("POST_OFFICE");
+          const p5Instance = instanceRef.current;
+          if (p5Instance && p5Instance._gameEngineContext) {
+            const ctx = p5Instance._gameEngineContext;
+            ctx.currentMap = ctx.postOfficeMap;
+            ctx.currentCam = ctx.postOfficeCam;
+            ctx.currentMapData = ctx.postOfficeData;
+            
+            // Calculate pixel coordinates based on actual map tile positions
+            // Tile (6, 9) is the ideal bottom-center entrance on your wood floor
+            const spawnTileX = 6;
+            const spawnTileY = 9;
+            const tileSize = ctx.tile_size * ctx.scale;
+            
+            const targetX = spawnTileX * tileSize;
+            const targetY = spawnTileY * tileSize;
+
+            if (ctx.mainSprite) {
+              ctx.mainSprite.x = targetX;
+              ctx.mainSprite.y = targetY;
+            } else if (p5Instance.mainSprite) {
+              p5Instance.mainSprite.x = targetX;
+              p5Instance.mainSprite.y = targetY;
+            }
+          }
         } else {
           setActiveModal("AUTH_REQUIRED");
         }
