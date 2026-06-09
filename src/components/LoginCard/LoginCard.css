@@ -1,0 +1,135 @@
+/* src/components/auth/LoginCard.css */
+
+/* 1. Main card panel container styled with a medieval wood panel backplate */
+.existing-user {
+  background-color: var(--panel-bg);
+  border: 4px double var(--border);
+  padding: 32px 24px;
+  max-width: 400px;
+  width: 100%;
+  margin: 20px auto;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+/* 2. Text elements mimicking classic retro fantasy prompt lines */
+.login-prompt {
+  color: var(--text-heading);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #1a1211;
+  margin-bottom: 20px;
+}
+
+.reset-prompt {
+  color: var(--text-main);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+/* 3. Grid Form wrapper organizing layout stacking flows */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 4. Text input field designs with sharp edge overrides and solid retro outlines */
+.email-field,
+.password-field {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px; /* Prevents auto-zooming behaviors on small viewport devices */
+  font-weight: bold;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  border: 2px solid var(--border);
+  border-radius: 0px; /* Sharp retro block design corners */
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+/* Focus and active highlight states leveraging laser pink tones */
+.email-field:focus,
+.password-field:focus {
+  border-color: var(--accent);
+  box-shadow: 2px 2px 0px #1a1211;
+}
+
+/* Inputs placeholder formatting */
+.email-field::placeholder,
+.password-field::placeholder {
+  color: #7a635a; /* Low-lit distressed placeholder tone */
+  text-transform: uppercase;
+}
+
+.enter-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 0px;
+  color: var(--text-main);
+  background-color: var(--social-bg);
+  border: 2px solid var(--border);
+  box-shadow: 2px 2px 0px #1a1211;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.enter-button:hover {
+  background-color: var(--border);
+  color: var(--text-heading);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #1a1211;
+}
+
+.enter-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0px 0px 0px transparent;
+}
+
+.enter-button:focus-visible {
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+}
+/* 5. Custom interactive text button acting like standard action boxes */
+.reset-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 0px;
+  color: var(--text-main);
+  background-color: var(--social-bg);
+  border: 2px solid var(--border);
+  box-shadow: 2px 2px 0px #1a1211;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  background-color: var(--border);
+  color: var(--text-heading);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #1a1211;
+}
+
+.reset-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0px 0px 0px transparent;
+}
+
+.reset-button:focus-visible {
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+}

@@ -4,7 +4,7 @@ import Sprite from "./classes/Sprite";
 import Laser from "./classes/Laser";
 import { parseTileFile, parseMapFile } from "./utils/helpers";
 
-export const gameEngine = (p) => {
+export const gameEngine = (p,reactCallbacks = {}) => {
   // Constant Definitions
   const tile_size = 16;
   const scale = 2;
@@ -21,6 +21,7 @@ export const gameEngine = (p) => {
   // Bridge reference objects to make collisions dynamic
   p._gameEngineContext = {
     tile_size, scale,
+    onTriggerAction: reactCallbacks.onTriggerAction || null,
     get currentMap() { return p._gameEngineContext.internalMap; },
     set currentMap(val) { p._gameEngineContext.internalMap = val; },
     get currentCam() { return p._gameEngineContext.internalCam; },
@@ -56,17 +57,17 @@ export const gameEngine = (p) => {
       p.loadStrings('/tex/indoor.csv')
     ]);
 
-    // 3. Assign files to scope references
+    //Assign files to scope references
     texSheet = loadedTexSheet;
     sprite1Tex = loadedSpriteTex;
     laserTex = loadedLaserTex;
 
-    // 4. Pass text array responses directly to your utility parsers
+    // Pass text array responses directly to your utility parsers
     parseTileFile(atlasLines, tileMap);
     outdoorData = parseMapFile(outdoorLines);
     indoorData = parseMapFile(indoorLines);
 
-    // 5. Instantiate constructors using newly hydrated configurations
+    //Instantiate constructors using newly hydrated configurations
     outdoorCam = new Camera(p, 1, 14, 14);
     indoorCam = new Camera(p, 2, 14, 14);
 

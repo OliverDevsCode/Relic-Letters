@@ -1,0 +1,109 @@
+/* src/components/auth/SignUpCard.css */
+
+/* 1. Main card panel container styled with a medieval wood panel backplate */
+.new-user {
+  background-color: var(--panel-bg);
+  border: 4px double var(--border);
+  padding: 32px 24px;
+  max-width: 400px;
+  width: 100%;
+  margin: 20px auto;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+/* 2. Text elements mimicking classic retro fantasy prompt lines */
+.create-prompt {
+  color: var(--text-heading);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #1a1211;
+  margin-bottom: 20px;
+}
+
+.create-prompt-2 {
+  color: var(--text-heading);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #1a1211;
+  margin-bottom: 20px;
+}
+
+/* 3. Grid Form wrapper organizing layout stacking flows */
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 4. Text input field designs with sharp edge overrides and solid retro outlines */
+.email-field,
+.password-field {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px; /* Prevents auto-zooming behaviors on small viewport devices */
+  font-weight: bold;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  border: 2px solid var(--border);
+  border-radius: 0px; /* Sharp retro block design corners */
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+/* Focus and active highlight states leveraging laser pink tones */
+.email-field:focus,
+.password-field:focus {
+  border-color: var(--accent);
+  box-shadow: 2px 2px 0px #1a1211;
+}
+
+/* Inputs placeholder formatting */
+.email-field::placeholder,
+.password-field::placeholder {
+  color: #7a635a; /* Low-lit distressed placeholder tone */
+  text-transform: uppercase;
+}
+
+/* 5. Main Action Button matching your neon pink accent theme */
+.enter-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  border-radius: 0px;
+  color: #ffffff;
+  background-color: var(--accent-bg);
+  border: 2px solid var(--accent-border);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+}
+
+.enter-button:hover {
+  background-color: var(--accent);
+  color: #1a1211;
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0px #1a1211;
+}
+
+.enter-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #1a1211;
+}
+
+.enter-button:focus-visible {
+  outline: 2px dashed var(--text-heading);
+  outline-offset: 4px;
+}

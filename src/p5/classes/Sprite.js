@@ -83,15 +83,28 @@ export default class Sprite {
         
         console.log(`hitbox: ${hitbox.id} - detected`);
 
-        if (hitbox.id === "house") {
-          //check if auth == true
-          context.currentMap = context.indoorMap;
-          context.currentCam = context.indoorCam;
-          context.currentMapData = context.indoorData;
-          
-          this.x = 6 * (scale * tile_size);
-          this.y = 9 * (scale * tile_size);
-        } 
+            if (hitbox.id === "house") {
+        // Trigger the React Context / Modal check!
+        if (context.onTriggerAction) {
+          // Pass the event target up to React
+          context.onTriggerAction({ type: "ENTER_HOUSE", hitbox });
+        }
+        
+        /* Note: Don't forcefully transition maps immediately here anymore!
+          Let React check the Auth status first. If auth is true, 
+          React can manually update context maps.
+        */
+      } 
+      else if (hitbox.id === "chair") {
+        if (context.onTriggerAction) {
+          context.onTriggerAction({ type: "OPEN_WRITE_INTERFACE" });
+        }
+      }
+      else if (hitbox.id === "postOffice") {
+        if (context.onTriggerAction) {
+          context.onTriggerAction({ type: "OPEN_POST_OFFICE" });
+        }
+      }
         else if (hitbox.id === "rug") {
           context.currentMap = context.outdoorMap;
           context.currentCam = context.outdoorCam;
@@ -101,12 +114,6 @@ export default class Sprite {
           this.y = 7 * (scale * tile_size);
           context.outdoorCam.x = 0;
           context.outdoorCam.y = 0;
-        }
-        else if (hitbox.id === "chair") {
-          console.log("open write component");
-        }
-        else if (hitbox.id === "postOffice") {
-          console.log("open postOffice component");
         }
       }
     });
