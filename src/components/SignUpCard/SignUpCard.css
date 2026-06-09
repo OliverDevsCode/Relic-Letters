@@ -13,7 +13,8 @@
 }
 
 /* 2. Text elements mimicking classic retro fantasy prompt lines */
-.create-prompt {
+.create-prompt,
+.create-prompt-2 {
   color: var(--text-heading);
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.25rem;
@@ -21,18 +22,22 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   text-shadow: 2px 2px 0px #1a1211;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .create-prompt-2 {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Subheading text inside the form */
+.create-form p {
   color: var(--text-heading);
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 2px 2px 0px #1a1211;
-  margin-bottom: 20px;
+  margin: 8px 0 4px 0;
 }
 
 /* 3. Grid Form wrapper organizing layout stacking flows */
@@ -43,8 +48,13 @@
 }
 
 /* 4. Text input field designs with sharp edge overrides and solid retro outlines */
+/* FIXED: Added ALL your input field classes here so they all share the same style */
+.username-field,
 .email-field,
-.password-field {
+.password-field,
+.house-num-field,
+.street-field,
+.city-field {
   width: 100%;
   padding: 10px 14px;
   font-family: 'Courier New', Courier, monospace;
@@ -60,20 +70,61 @@
 }
 
 /* Focus and active highlight states leveraging laser pink tones */
+.username-field:focus,
 .email-field:focus,
-.password-field:focus {
+.password-field:focus,
+.house-num-field:focus,
+.street-field:focus,
+.city-field:focus {
   border-color: var(--accent);
   box-shadow: 2px 2px 0px #1a1211;
 }
 
 /* Inputs placeholder formatting */
+.username-field::placeholder,
 .email-field::placeholder,
-.password-field::placeholder {
+.password-field::placeholder,
+.house-num-field::placeholder,
+.street-field::placeholder,
+.city-field::placeholder {
   color: #7a635a; /* Low-lit distressed placeholder tone */
   text-transform: uppercase;
 }
 
-/* 5. Main Action Button matching your neon pink accent theme */
+/* 5. Terms of Service checkbox alignment */
+.tos-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  color: var(--text-main);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.tos-container input[type="checkbox"] {
+  accent-color: var(--accent); /* Makes the checkbox checkmark match your neon accent color */
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+/* 6. Error handling design block */
+.error {
+  color: #ff3333;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px dashed #ff3333;
+  padding: 8px;
+  margin: 4px 0;
+}
+
+/* 7. Main Action Button matching your neon pink accent theme */
 .enter-button {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
