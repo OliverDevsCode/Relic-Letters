@@ -1,7 +1,7 @@
 import React from 'react'
 import LoginCard from '../LoginCard/LoginCard'
 import SignUpCard from '../SignUpCard/SignUpCard'
-import './AuthPopup.css' // Ensure the CSS is explicitly linked!
+import './AuthPopUp.css' // Ensure the CSS is explicitly linked!
 
 const AuthPopUp = ({ onClose }) => {
   return (
