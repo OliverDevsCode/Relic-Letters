@@ -1,5 +1,5 @@
 {
-  "short_name": "Formula Friends",
+  "short_name": "Relic letters",
   "name": "Relic letters",
   "icons": [
     {
@@ -15,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "2B1F1D",
+  "theme_color": "#2B1F1D",
   "background_color": "#ffffff"
 }
