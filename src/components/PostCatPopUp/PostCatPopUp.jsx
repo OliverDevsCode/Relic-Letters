@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './PostCatPopUp.css';
 
 const PostCatPopUp = ({ onClose, onPostLetter, onCheckPost }) => {
   const [prioSpeech, setPrioSpeech] = useState("Please choose from the following");
+
+  useEffect(()=>{
+    console.log("post office cat opened")
+  },[])
 
   const handlePostClick = () => {
     setPrioSpeech("Purr-fect! Let's get that letter sorted.");

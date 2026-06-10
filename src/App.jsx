@@ -1,17 +1,29 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './components/HomePage/HomePage' 
 import { AuthProvider } from './contexts/authContext';
 
+import { messaging } from './utils/firebaseConfig';
+import { onMessage } from 'firebase/messaging';
+import { showToast ,Toaster  } from './utils/inAppNotifications';
+
+
 function App() {
+
+  useEffect(() => {
+    onMessage(messaging, (payload) => {
+      console.log('Message received: ', payload);
+      showToast(payload);
+    });
+  }, []);
 
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* 2. Now HomePage and any child elements (like GameSketch) can safely use useAuth() */}
           <Route path="/" element={<HomePage />} />
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </AuthProvider>
   )

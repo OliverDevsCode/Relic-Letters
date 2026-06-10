@@ -1,5 +1,13 @@
 /* src/index.css */
 
+/*custom font i found */
+@font-face {
+  font-family: 'Retro16Bit';
+  src: url('/fonts/16-bit.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 1. Global Custom Theme Variables mapping your retro wooden/parchment colors */
 :root {
   /* Core Brand Colors */
@@ -50,7 +58,7 @@ body {
 /* 3. Retro Headings Layout */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-heading);
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Retro16Bit', monospace;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;

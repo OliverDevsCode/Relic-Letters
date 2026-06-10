@@ -12,6 +12,7 @@
 
 /* Container bounding layout elements above the canvas */
 .title-container {
+  font-family: 'Retro16Bit';
   display: block;
   width: 100%;           /* 🌟 Added: Tells the box to take up full horizontal space */
   text-align: center;    /* 🌟 Added: Centers everything inside this bounding block */
