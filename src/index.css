@@ -2,7 +2,7 @@
 
 /*custom font i found */
 @font-face {
-  font-family: 'Retro16Bit';
+  font-family: 'Quager';
   src: url('/fonts/16-bit.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -58,7 +58,7 @@ body {
 /* 3. Retro Headings Layout */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-heading);
-  font-family: 'Retro16Bit', monospace;
+  font-family: 'Quager', monospace;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;

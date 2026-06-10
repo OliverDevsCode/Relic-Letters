@@ -21,7 +21,7 @@
 
 /* Styled heading matching a retro fantasy title screen */
 .homepage-container h1 {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Quager', monospace;
   font-size: 2.5rem;
   color: var(--text-heading);
   text-transform: uppercase;
