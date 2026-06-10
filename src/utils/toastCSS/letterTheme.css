@@ -1,18 +1,12 @@
 /* src/components/toastCSS/letterTheme.css */
 
 .letter-toast {
-  /* Old-fashioned paper fallback color (warm cream/parchment) */
   background-color: #f4ecd8; 
-  
-  /* Applies your texture image cleanly */
   background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px), url('/toast-tex');
   background-size: 100% 24px, cover;
   background-position: center;
-  
-  /* Double border matching your terminal window system */
-  border: 4px double #4a3b32; /* Deep brown ink style border */
+  border: 4px double #4a3b32; 
   box-shadow: 4px 4px 0px rgba(26, 18, 17, 0.2);
-  
   padding: 16px;
   min-width: 280px;
   max-width: 360px;
@@ -24,36 +18,28 @@
   font-family: 'Courier New', Courier, monospace;
   position: relative;
   z-index: 2;
+  text-align: left; /* Ensures left-aligned typewriter aesthetic */
 }
 
-.toast-title {
+/* Changed from div selectors to explicit headers/paragraphs */
+h4.toast-title {
   margin: 0 0 8px 0;
   font-size: 15px;
   font-weight: bold;
-  
-  /* High contrast ink colors */
   color: #1a1211 !important; 
-  
-  /* CRITICAL: Explicitly removes neon/dark shadows from global styles */
   text-shadow: none !important; 
-  
   text-transform: uppercase;
   letter-spacing: 1px;
   border-bottom: 2px dashed #7a635a;
   padding-bottom: 6px;
 }
 
-.toast-message {
+p.toast-message {
   margin: 0;
   font-size: 13px;
   font-weight: bold;
   line-height: 1.5;
-  
-  /* Dark typewriter ink color */
   color: #2b201d !important; 
-  
-  /* Ensures no stray shadows affect message readability either */
   text-shadow: none !important; 
-  
   word-break: break-word;
 }

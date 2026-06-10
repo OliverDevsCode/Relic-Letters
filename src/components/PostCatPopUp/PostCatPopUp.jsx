@@ -1,18 +1,35 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, use } from 'react';
+import PostLetterPopUp from '../PostLetterPopUp/PostLetterPopUp';
+import { getUserDoc } from '../../utils/userDB';
+import { useAuth } from '../../contexts/authContext';
 import './PostCatPopUp.css';
 
-const PostCatPopUp = ({ onClose, onPostLetter, onCheckPost }) => {
+const PostCatPopUp = ({ onClose }) => {
   const [prioSpeech, setPrioSpeech] = useState("Please choose from the following");
+  const [posting,setPosting] = useState(false);
+  const [username,setUsername] = useState('');
+
+  const { currentUser } = useAuth();
+
 
   useEffect(()=>{
-    console.log("post office cat opened")
+    async function getUserInfo(){
+      if(currentUser){
+        const uid = currentUser.uid
+        const response = await getUserDoc(uid);
+        setUsername(response.username);
+      }
+    }
+    getUserInfo()
   },[])
+  
 
   const handlePostClick = () => {
     setPrioSpeech("Purr-fect! Let's get that letter sorted.");
-    setTimeout(() => {
-      if (onPostLetter) onPostLetter();
-    }, 800);
+    setPosting(true);
+    // setTimeout(() => {
+    //   if (onPostLetter) onPostLetter();
+    // }, 800);
   };
 
   const handleCheckClick = () => {
@@ -24,6 +41,9 @@ const PostCatPopUp = ({ onClose, onPostLetter, onCheckPost }) => {
 
   return (
     <div className='post-cat-backdrop'>
+      {posting && (
+        <PostLetterPopUp setPosting={setPosting} username={username}/>
+      )}
       <div className='post-cat-editor'>
         {/* Top corner quick-exit layout element */}
         <button className='close-popup-btn' onClick={onClose}>

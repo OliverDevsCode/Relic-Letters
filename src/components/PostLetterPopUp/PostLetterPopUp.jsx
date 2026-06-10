@@ -1,0 +1,247 @@
+import React, { useEffect, useState } from 'react';
+import './PostLetterPopUp.css';
+import { getDraftLetters } from '../../utils/userDB';
+import LetterCard from '../LetterCard/LetterCard';
+import { useAuth } from '../../contexts/authContext';
+import { attemptToast } from '../../utils/inAppNotifications';
+
+// api 
+import { postLetterAPI } from '../../utils/requests';
+
+const PostLetterPopUp = ({setPosting,username }) => {
+  const [userLetters, setUserLetters] = useState([]);
+  const [postageType, setPostageType] = useState('pigeon');
+  const [selectedLetter, setSelectedLetter] = useState(null);
+  
+  // Step management: 1 = Select Letter, 2 = Select Postage, 3 = Enter Address
+  const [currentStep, setCurrentStep] = useState(1);
+
+  // Address data
+  const [houseNumber, setHouseNumber] = useState('');
+  const [streetName, setStreetName] = useState('');
+  const [postCode, setPostCode] = useState('');
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { currentUser } = useAuth();
+
+  const handleSelectLetter = (id) => {
+    console.log("opening letter:", id);
+    const letter = userLetters.find(l => l.letterId === id);
+    if (letter) {
+      setSelectedLetter(letter);
+      setCurrentStep(2); // Move to Postage selection
+    }
+  };
+
+  const handleSendLetter = async () => {
+    // Basic validation
+    if (!houseNumber || !streetName || !postCode) {
+      alert("Please fill out all address fields before sending.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const payload = {
+        senderId: currentUser?.uid,
+        sender: username,
+        letter: selectedLetter,
+        houseNumber,
+        streetName,
+        postCode,
+        postage:postageType,
+      };
+
+      console.log("Sending letter payload:", payload);
+      const letterPromise = postLetterAPI(payload);
+
+      attemptToast({
+        title:'Sent Letter',
+        message:'Stamped and ready!',
+        promise:letterPromise
+      })
+      const response = await letterPromise;
+      console.log(response);
+      
+      // Close popup after success
+      setPosting(false);
+    } catch (error) {
+      console.error("Failed to post letter:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  useEffect(() => {
+    async function fetchLetters() {
+      if (currentUser) {
+        const uid = currentUser.uid;
+        console.log(`fetching postable letters with userId ${uid}`);
+        try {
+          const letterData = await getDraftLetters(uid);
+          setUserLetters(letterData);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+    fetchLetters();
+  }, [currentUser]);
+
+  const retroInputStyle = {
+    fontFamily: "'Courier New', monospace",
+    padding: '8px',
+    backgroundColor: 'var(--bg-main)',
+    color: 'var(--text-heading)',
+    border: '2px solid var(--border)',
+    width: '100%',
+    boxSizing: 'border-box'
+  };
+
+  const retroBtnStyle = {
+    fontFamily: "'Courier New', monospace",
+    padding: '4px 8px',
+    cursor: 'pointer',
+    background: 'none',
+    border: '2px solid var(--border)',
+    color: 'var(--text-heading)'
+  };
+
+  return (
+    <div className='popup-backdrop' onClick={() => setPosting(false)}>
+      <div className='letter-tray' onClick={(e) => e.stopPropagation()}>
+        
+        <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span>
+            {currentStep === 1 && "Select Letter to Post"}
+            {currentStep === 2 && "Select Postage Method"}
+            {currentStep === 3 && "Enter Delivery Address"}
+          </span>
+          <span 
+            className='retro-close' 
+            onClick={() => setPosting(false)}
+            style={{ cursor: 'pointer', padding: '0 4px' }}
+          >
+            [X]
+          </span>
+        </p>
+        
+        {currentStep === 1 && (
+          <div className="letter-tray-scrollable">
+            {userLetters.length === 0 ? (
+              <p style={{ fontSize: '0.9rem', textAlign: 'center' }}>No drafts available.</p>
+            ) : (
+              userLetters.map((data) => (
+                <LetterCard
+                  key={data.letterId || data.id}
+                  id={data.letterId}
+                  title={data.title}
+                  date={data.date}
+                  sender={data.sender}
+                  openLetter={handleSelectLetter}
+                />
+              ))
+            )}
+          </div>
+        )}
+
+        {currentStep === 2 && (
+          <div className='postage-options' style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <p style={{ border: 'none', textShadow: 'none', fontSize: '0.95rem', margin: 0 }}>
+              Carrier for: <strong>{selectedLetter?.title}</strong>
+            </p>
+            
+            <select 
+              value={postageType} 
+              onChange={(e) => setPostageType(e.target.value)}
+              style={retroInputStyle}
+            >
+              <option value="magic">Magic (Instant) reliability: 10/10</option>
+              <option value="pigeon">Pigeon (1-2 day) reliability: 8/10</option>
+              <option value="horse">Messenger via horse (3-4 day) reliability: 6/10</option>
+              <option value="walking">Messenger walking (8-10 day) reliability: 5/10</option>
+            </select>
+            
+            <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
+              <button style={retroBtnStyle} onClick={() => setCurrentStep(1)}>
+                [Back]
+              </button>
+              <button 
+                className='send-button' 
+                style={{ ...retroBtnStyle, marginLeft: 'auto' }}
+                onClick={() => setCurrentStep(3)}
+              >
+                Next: Address &rarr;
+              </button>
+            </div>
+          </div>
+        )}
+
+        {currentStep === 3 && (
+          <div className='address-form' style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <p style={{ border: 'none', textShadow: 'none', fontSize: '0.95rem', margin: 0 }}>
+              Addressing: <strong>{selectedLetter?.title}</strong> via {postageType}
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <label style={{ fontSize: '0.85rem' }}>House Number / Name:</label>
+              <input 
+                type="text" 
+                value={houseNumber} 
+                onChange={(e) => setHouseNumber(e.target.value)} 
+                placeholder="e.g., 221B"
+                style={retroInputStyle}
+              />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <label style={{ fontSize: '0.85rem' }}>Street Name:</label>
+              <input 
+                type="text" 
+                value={streetName} 
+                onChange={(e) => setStreetName(e.target.value)} 
+                placeholder="e.g., Baker Street"
+                style={retroInputStyle}
+              />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <label style={{ fontSize: '0.85rem' }}>Postcode / ZIP:</label>
+              <input 
+                type="text" 
+                value={postCode} 
+                onChange={(e) => setPostCode(e.target.value)} 
+                placeholder="e.g., NW1 6XE"
+                style={retroInputStyle}
+              />
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
+              <button style={retroBtnStyle} onClick={() => setCurrentStep(2)} disabled={isSubmitting}>
+                [Back]
+              </button>
+              <button 
+                className='send-button' 
+                onClick={handleSendLetter}
+                disabled={isSubmitting}
+                style={{
+                  ...retroBtnStyle,
+                  marginLeft: 'auto',
+                  backgroundColor: 'var(--text-heading)',
+                  color: 'var(--bg-main)',
+                  fontWeight: 'bold',
+                  opacity: isSubmitting ? 0.5 : 1
+                }}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Letter'}
+              </button>
+            </div>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+};
+
+export default PostLetterPopUp;

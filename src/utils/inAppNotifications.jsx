@@ -18,17 +18,49 @@ function attemptToast({ title, message, promise }) {
     promise,
     {
       loading: (
-        <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <img 
-            src="/toastGifs/processing.gif" 
-            alt="Loading" 
-            style={{ width: '20px', height: '20px' }} 
-          />
-          Processing...
-        </span>
+        <div className="letter-toast animate-fade-in">
+          <div className="toast-text">
+            <h4 className="toast-title">{title} Status</h4>
+            <p className="toast-message" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <img 
+                src="/toastGifs/processing.gif" 
+                alt="Loading" 
+                style={{ width: '20px', height: '20px' }} 
+              />
+              Dispatched carrier...
+            </p>
+          </div>
+        </div>
       ),
-      success: `${title}: ${message}`,
-      error: (err) => `${title} failed: ${err.message || err}`,
+
+      success: (data) => (
+        <div className="letter-toast">
+          <div className="toast-text">
+            <h4 className="toast-title">{title}: Sent</h4>
+            <p className="toast-message">{message}</p>
+          </div>
+        </div>
+      ),
+
+      error: (err) => (
+        <div className="letter-toast" style={{ borderColor: '#8b0000' }}> {/* Slight red tint alternative for errors */}
+          <div className="toast-text">
+            <h4 className="toast-title" style={{ color: '#8b0000' }}>{title}: Failed</h4>
+            <p className="toast-message">{err.message || err || 'Carrier lost en route.'}</p>
+          </div>
+        </div>
+      )
+    },
+    {
+      style: {
+        background: 'none',
+        border: 'none',
+        padding: 0,
+        boxShadow: 'none',
+      },
+      success: { icon: null },
+      error: { icon: null },
+      loading: { icon: null }
     }
   );
 }
