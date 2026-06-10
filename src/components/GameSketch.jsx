@@ -12,10 +12,7 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
   
   // Consuming custom Auth states
   const { userLoggedIn, currentUser } = useAuth();
-  //for fcm fetch
-  const userId = currentUser.uid;
-
-
+  
   //  1. Create a mutable ref to hold the latest game action logic
   const gameActionRef = useRef(null);
 
@@ -24,6 +21,8 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
     gameActionRef.current = (event) => {
       if (event.type === "ENTER_HOUSE") {
         if (userLoggedIn) {
+          const userId = currentUser.uid;
+
           fetchFCMToken(userId);
           const p5Instance = instanceRef.current;
           if (p5Instance && p5Instance._gameEngineContext) {
