@@ -18,8 +18,7 @@ messaging.onBackgroundMessage(function(payload) {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    // icon: '/firebase-logo.png'  // Optional: ADD Relic leter icon
+    icon: '/icons/logo-512.png' 
   };
-
   self.registration.showNotification(notificationTitle, notificationOptions);
 });
