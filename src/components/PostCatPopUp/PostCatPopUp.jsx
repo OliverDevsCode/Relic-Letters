@@ -1,5 +1,6 @@
 import React, { useState,useEffect, use } from 'react';
 import PostLetterPopUp from '../PostLetterPopUp/PostLetterPopUp';
+import CollectLetterPopUp from '../CollectLetterPopUp/CollectLetterPopUp';
 import { getUserDoc } from '../../utils/userDB';
 import { useAuth } from '../../contexts/authContext';
 import './PostCatPopUp.css';
@@ -7,7 +8,9 @@ import './PostCatPopUp.css';
 const PostCatPopUp = ({ onClose }) => {
   const [prioSpeech, setPrioSpeech] = useState("Please choose from the following");
   const [posting,setPosting] = useState(false);
+  const [collecting,setCollecting] = useState(false);
   const [username,setUsername] = useState('');
+  const [userId,setUserId] = useState('');
 
   const { currentUser } = useAuth();
 
@@ -16,6 +19,7 @@ const PostCatPopUp = ({ onClose }) => {
     async function getUserInfo(){
       if(currentUser){
         const uid = currentUser.uid
+        setUserId(uid);
         const response = await getUserDoc(uid);
         setUsername(response.username);
       }
@@ -34,15 +38,19 @@ const PostCatPopUp = ({ onClose }) => {
 
   const handleCheckClick = () => {
     setPrioSpeech("Let me check the cubbyholes for you...");
-    setTimeout(() => {
-      if (onCheckPost) onCheckPost();
-    }, 800);
+    setCollecting(true);
+    // setTimeout(() => {
+    //   if (onCheckPost) onCheckPost();
+    // }, 800);
   };
 
   return (
     <div className='post-cat-backdrop'>
       {posting && (
-        <PostLetterPopUp setPosting={setPosting} username={username}/>
+        <PostLetterPopUp setPosting={setPosting} username={username} onClose={onClose}/>
+      )}
+      {collecting && (
+        <CollectLetterPopUp setCollecting={setCollecting} userId={userId}/>
       )}
       <div className='post-cat-editor'>
         {/* Top corner quick-exit layout element */}

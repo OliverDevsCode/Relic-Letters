@@ -1,0 +1,124 @@
+/* src/components/CollectLetterPopUp/CollectLetterPopUp.css */
+
+/* Reuse the backdrop styles sent over */
+.popup-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual list item layout element rows */
+.collect-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border: 2px solid var(--border);
+  background-color: var(--bg-main);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.collect-card:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: var(--text-heading);
+}
+
+/* Accent highlight when an incoming letter row gets selected */
+.collect-card.selected {
+  border-color: var(--border);
+  background-color: rgba(var(--border-rgb, 255, 255, 255), 0.08);
+  box-shadow: inset 0 0 8px rgba(var(--border-rgb, 255, 255, 255), 0.1);
+}
+
+/* Fixed spacing layout block adjustments for monospace brackets */
+.collect-checkbox {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--text-heading);
+  user-select: none;
+}
+
+.collect-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.collect-title {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-heading);
+}
+
+.collect-meta {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted, #888);
+}
+
+.no-mail-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  color: var(--text-muted, #888);
+  text-align: center;
+  padding: 40px 10px;
+  margin: 0;
+}
+
+/* --- Base Standard Template Rules from User Config --- */
+
+.send-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: transparent;
+  color: var(--text-heading);
+  border: 2px solid var(--border);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  text-shadow: 1px 1px 0px #1a1211;
+}
+
+.send-button:hover {
+  background-color: var(--border);
+  color: var(--bg-main);
+  box-shadow: 0px 0px 10px var(--border);
+}
+
+.send-button:active {
+  transform: scale(0.98);
+}
+
+.retro-btn {
+  font-family: "'Courier New', monospace";
+  padding: 4px 12px;
+  cursor: pointer;
+  background: none;
+  border: 2px solid var(--border);
+  color: var(--text-heading);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retro-close:hover, .retro-btn:hover {
+  color: var(--accent, #ff5555);
+  background-color: rgba(255, 255, 255, 0.05);
+}

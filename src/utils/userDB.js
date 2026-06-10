@@ -77,30 +77,31 @@ async function getRecievedLetters(userId) {
   if (!userId) return [];
 
   try {
-    // 1. Reference the user's private letters subcollection
+    console.log(`Attemping to get received letters for ${userId}`)
+    //  Reference the user's private letters subcollection
     const userLettersRef = collection(db, "users", userId, "letters");
     
-    // 2. Build the query to filter by status AND sort chronologically
+    // Build the query to filter by status AND sort chronologically
     const q = query(
       userLettersRef,
       where("status", "==", "received"),
-      orderBy("date", "desc")
+      orderBy("collectedAt", "desc")
     );
     
-    // 3. Execute the fetch
+    //  fetch
     const querySnapshot = await getDocs(q);
     
-    // 4. Format the documents into clean objects with their autoIds
-    const draftsArray = querySnapshot.docs.map(docSnap => ({
+    //format the documents into clean objects with their autoIds
+    const receivedArray = querySnapshot.docs.map(docSnap => ({
       letterId: docSnap.id, // Keep the ID for updating the draft later!
       ...docSnap.data()
     }));
 
-    console.log(`Fetched ${draftsArray.length} active drafts.`);
-    return draftsArray;
+    console.log(`Fetched ${receivedArray.length} received letters.`);
+    return receivedArray;
 
   } catch (error) {
-    console.error("Error fetching draft letters:", error);
+    console.error("Error fetching received letters:", error);
     return false;
   }
 }

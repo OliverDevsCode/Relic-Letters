@@ -8,9 +8,12 @@ import { attemptToast } from '../../utils/inAppNotifications';
 // api 
 import { postLetterAPI } from '../../utils/requests';
 
+//dynamic postageTypes
+import postageData from '../../utils/postageTypes.json';
+
 const PostLetterPopUp = ({setPosting,username }) => {
   const [userLetters, setUserLetters] = useState([]);
-  const [postageType, setPostageType] = useState('pigeon');
+  const [postageType, setPostageType] = useState(postageData[1]?.name || 'pigeon');
   const [selectedLetter, setSelectedLetter] = useState(null);
   
   // Step management: 1 = Select Letter, 2 = Select Postage, 3 = Enter Address
@@ -88,6 +91,13 @@ const PostLetterPopUp = ({setPosting,username }) => {
     fetchLetters();
   }, [currentUser]);
 
+  const formatCarrierName = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+  const formatTime = (days) => {
+    if (days === 0) return 'Instant';
+    return days === 1 ? '1 day' : `${days} days`;
+  };
+
   const retroInputStyle = {
     fontFamily: "'Courier New', monospace",
     padding: '8px',
@@ -156,10 +166,11 @@ const PostLetterPopUp = ({setPosting,username }) => {
               onChange={(e) => setPostageType(e.target.value)}
               style={retroInputStyle}
             >
-              <option value="magic">Magic (Instant) reliability: 10/10</option>
-              <option value="pigeon">Pigeon (1-2 day) reliability: 8/10</option>
-              <option value="horse">Messenger via horse (3-4 day) reliability: 6/10</option>
-              <option value="walking">Messenger walking (8-10 day) reliability: 5/10</option>
+              {postageData.map((option) => (
+                <option key={option.name} value={option.name}>
+                  {formatCarrierName(option.name)} ({formatTime(option.time)}) reliability: {option.reliability}/10
+                </option>
+              ))}
             </select>
             
             <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>

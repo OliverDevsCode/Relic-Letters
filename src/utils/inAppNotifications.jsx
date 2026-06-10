@@ -27,7 +27,7 @@ function attemptToast({ title, message, promise }) {
                 alt="Loading" 
                 style={{ width: '20px', height: '20px' }} 
               />
-              Dispatched carrier...
+              Dispatched carrier cat...
             </p>
           </div>
         </div>

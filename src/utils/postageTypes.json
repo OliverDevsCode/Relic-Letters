@@ -1,0 +1,22 @@
+[
+  {
+    "name":"magic",
+    "time":0,
+    "reliability":10
+  },
+  {
+    "name":"pigeon",
+    "time":1,
+    "reliability":7
+  },
+  {
+    "name":"horse",
+    "time":3,
+    "reliability":9
+  },
+  {
+    "name":"walking",
+    "time":7,
+    "reliability":7
+  }
+]
