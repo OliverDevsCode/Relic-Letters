@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './PostLetterPopUp.css';
 import { getDraftLetters } from '../../utils/userDB';
+import LetterPopUp from '../LetterPopUp/LetterPopUp';
 import LetterCard from '../LetterCard/LetterCard';
 import { useAuth } from '../../contexts/authContext';
 import { attemptToast } from '../../utils/inAppNotifications';
@@ -23,9 +24,19 @@ const PostLetterPopUp = ({setPosting,username }) => {
   const [houseNumber, setHouseNumber] = useState('');
   const [streetName, setStreetName] = useState('');
   const [postCode, setPostCode] = useState('');
+  const [previewLetter,setPreviewLetter] = useState(false);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { currentUser } = useAuth();
+
+  const handlePreviewLetter = (id) => {
+    console.log("opening letter:", id);
+    const letter = userLetters.find(l => l.letterId === id);
+    if (letter) {
+      setPreviewLetter(true);
+      setSelectedLetter(letter);
+    }
+  };
 
   const handleSelectLetter = (id) => {
     console.log("opening letter:", id);
@@ -34,6 +45,11 @@ const PostLetterPopUp = ({setPosting,username }) => {
       setSelectedLetter(letter);
       setCurrentStep(2); // Move to Postage selection
     }
+  };
+
+  const handleCloseLetter = (id) => {
+      setSelectedLetter([]);
+      setPreviewLetter(false);
   };
 
   const handleSendLetter = async () => {
@@ -119,6 +135,9 @@ const PostLetterPopUp = ({setPosting,username }) => {
 
   return (
     <div className='popup-backdrop' onClick={() => setPosting(false)}>
+      {previewLetter && (
+        <LetterPopUp letter={selectedLetter} closeLetter={handleCloseLetter}/>
+      )}
       <div className='letter-tray' onClick={(e) => e.stopPropagation()}>
         
         <p style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -142,14 +161,23 @@ const PostLetterPopUp = ({setPosting,username }) => {
               <p style={{ fontSize: '0.9rem', textAlign: 'center' }}>No drafts available.</p>
             ) : (
               userLetters.map((data) => (
-                <LetterCard
-                  key={data.letterId || data.id}
-                  id={data.letterId}
-                  title={data.title}
-                  date={data.date}
-                  sender={data.sender}
-                  openLetter={handleSelectLetter}
-                />
+                <div key={data.letterId || data.id} className="letter-select-row">
+                  <div className="letter-card-flex-wrapper">
+                    <LetterCard
+                      id={data.letterId}
+                      title={data.title}
+                      date={data.date}
+                      sender={data.sender}
+                      openLetter={handlePreviewLetter}
+                    />
+                  </div>
+                  <button 
+                    className="select-draft-btn" 
+                    onClick={() => handleSelectLetter(data.letterId || data.id)}
+                  >
+                    Select
+                  </button>
+                </div>
               ))
             )}
           </div>
