@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       <div className='title-container'>
-        <h1>Welcome to Rustic Letters</h1>
+        <h1>Welcome to Relic Letters</h1>
       </div>
       <div className="game-wrapper-box">
         <GameSketch activeModal={activeModal} setActiveModal={setActiveModal} />
