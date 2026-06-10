@@ -1,0 +1,119 @@
+/* Full viewport background backdrop */
+.legal-screen-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #1a1211; /* Your dark app backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Container mimicking a technical document sheet */
+.legal-container {
+  background-color: var(--bg-surface, #2c1e1c);
+  border: 3px solid var(--border, #dfa97e); /* Adjust to your main terminal color */
+  padding: 30px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  color: var(--text-heading, #f3e6d8);
+}
+
+/* Header typography */
+.legal-header h1 {
+  font-size: 1.1rem;
+  color: var(--accent, #ffaa44);
+  margin: 0 0 6px 0;
+  letter-spacing: 1px;
+}
+
+.legal-header h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.terminal-divider {
+  color: var(--border, #dfa97e);
+  opacity: 0.5;
+  margin: 12px 0;
+  user-select: none;
+}
+
+/* Scrollable terms container */
+.legal-body-scrollable {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 12px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+/* Individual terms sections */
+.legal-section {
+  margin-bottom: 24px;
+}
+
+.legal-section h3 {
+  font-size: 1rem;
+  color: var(--accent, #ffaa44);
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+}
+
+.legal-section p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--text-body, #d0bfa7);
+}
+
+/* Footer layout rules */
+.legal-footer {
+  text-align: center;
+}
+
+.legal-stamp {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  letter-spacing: 2px;
+  margin: 0 0 16px 0;
+}
+
+/* Retro Return Action Button */
+.legal-back-btn {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: transparent;
+  color: var(--text-heading, #f3e6d8);
+  border: 2px solid var(--border, #dfa97e);
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.legal-back-btn:hover {
+  background-color: var(--border, #dfa97e);
+  color: var(--bg-surface, #2c1e1c);
+  box-shadow: 0px 0px 10px var(--border, #dfa97e);
+}
+
+.legal-back-btn:active {
+  transform: scale(0.97);
+}
+
+/* Custom terminal scrollbar tweaks */
+.legal-body-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+.legal-body-scrollable::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.legal-body-scrollable::-webkit-scrollbar-thumb {
+  background: var(--border, #dfa97e);
+}

@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './components/HomePage/HomePage' 
+import LegalPage from './components/LegalPage/LegalPage';
 import { AuthProvider } from './contexts/authContext';
 
 import { messaging } from './utils/firebaseConfig';
@@ -22,6 +23,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/legal" element={<LegalPage />} />
         </Routes>
         <Toaster />
       </BrowserRouter>
