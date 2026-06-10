@@ -1,18 +1,32 @@
-# React + Vite
+# Relic Letters
+I custom medieval fantasy themed letter app I wrote for a special someone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Key Features
+* ** Move into your house - create your own address
+* ** Write letters at your desk
+* ** Keep a collection of previous letters
+* ** Vist the post office to post a letter
+* ** Choose all kind of postage options!
+* ** Collect your post
+* ** Recieve notificaions when someone has posted to you
 
-Currently, two official plugins are available:
+## Upcoming Features + Roadmap
+* ** Some mail gets lost - you may have to search the map to find it
+* ** Hidden messages - some letters may have a cipher
+* **Notifications when letters arrive
+* **View all missed notificaions in app and manage them
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## AI Disclosure
+The idea of the application is conceptualised and structurally designed entirely by me, this came from my heart. AI assistance was utilised specifically as a development partner to speed up development via the following:
+* Reformat complex logic loops.
+* Safely wire up advanced external APIs and modular libraries.
+* Designing the frontend CSS layouts (because who *actually* enjoys debugging CSS flexbox?).
 
-## React Compiler
+## Terms of Use & License
+Please use this software exclusively for good! 
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+You are completely welcome to **fork, tweak, and re-skin** this codebase to create a magical experience for your own special someone. All I ask is that you please maintain a visible link crediting the original repository. 
 
-Note: This will impact Vite dev & build performances.
+Made with ❤️ and a lot of patience.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
