@@ -1,5 +1,5 @@
 # Relic Letters
-I custom medieval fantasy themed letter app I wrote for a special someone
+A custom medieval fantasy themed letter app I wrote for a special someone
 
 ## Key Features
 * Move into your house - create your own address
@@ -16,7 +16,7 @@ I custom medieval fantasy themed letter app I wrote for a special someone
 *Notifications when letters arrive
 *View all missed notificaions in app and manage them
 
-## Key Features & Gameplay
+## Gameplay Demonstrations
 
 ### Settling In & Movement
 Move into your new estate, create your own unique fantasy address, and explore the area.
