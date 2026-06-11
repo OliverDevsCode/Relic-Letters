@@ -60,6 +60,8 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
       
       if (event.type === "OPEN_POST_OFFICE") {
         if (userLoggedIn) {
+          const userId = currentUser.uid;
+          fetchFCMToken(userId);
           const p5Instance = instanceRef.current;
           if (p5Instance && p5Instance._gameEngineContext) {
             const ctx = p5Instance._gameEngineContext;
