@@ -132,7 +132,7 @@ async function collectLetters(userId, collectedIds) {
         //write to letters collection in the batch
         batch.set(targetDocRef, {
           ...letterData,
-          status: 'received', 
+          status: 'collected', 
           collectedAt: new Date() 
         });
 

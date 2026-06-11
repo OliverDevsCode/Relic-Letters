@@ -84,7 +84,7 @@ async function getRecievedLetters(userId) {
     // Build the query to filter by status AND sort chronologically
     const q = query(
       userLettersRef,
-      where("status", "==", "received"),
+      where("status", "==", "collected"),
       orderBy("collectedAt", "desc")
     );
     
