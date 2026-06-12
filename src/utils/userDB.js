@@ -314,5 +314,57 @@ async function addContactToContacts(savedName,houseNumber,streetName,cityName,us
 
 }
 
+async function getNotifications(userId) {
+  //users/notifications
+  if(!userId){
+    console.error("cannot get notificaions with no UserId")
+    return false;
+  }
+  try {
+    // 1. Reference the user's private notifications subcollection
+    const userNotificationsRef = collection(db, "users", userId, "notifications");
+    
+    // 2. Build the query to filter by status AND sort chronologically
+    const q = query(
+      userNotificationsRef,
+      orderBy("createdAt", "desc")
+    );
+    
+    // 3. Execute the fetch
+    const querySnapshot = await getDocs(q);
+    
+    // 4. Format the documents into clean objects with their autoIds
+    const draftsArray = querySnapshot.docs.map(docSnap => ({
+      notificationId: docSnap.id, // Keep the ID for updating the draft later!
+      ...docSnap.data()
+    }));
 
-export {createUser,saveLetter,sendLetter,getUserDoc,getDraftLetters,getRecievedLetters,getUserContacts,addContactToContacts};
+    console.log(`Fetched ${draftsArray.length} active notifications.`);
+    return draftsArray;
+
+  } catch (error) {
+    console.error("Error fetching draft letters:", error);
+    return false;
+  }
+
+  //returns array of notifications
+}
+
+async function deleteNotification(notificationId,userId){
+  //delete notifications
+  if(!notificationId || !userId){
+    return false;
+  }
+
+  try {
+    const userNotificationsRef = doc(db, "users", userId, "notifications",notificationId);
+    await deleteDoc(userNotificationsRef);
+    return true
+  } catch (error) {
+    console.error(error);
+    return false
+  }
+}
+
+
+export {createUser,saveLetter,sendLetter,getUserDoc,getDraftLetters,getRecievedLetters,getUserContacts,addContactToContacts,getNotifications,deleteNotification};

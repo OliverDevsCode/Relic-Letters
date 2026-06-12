@@ -4,6 +4,8 @@ import AuthPopUp from '../AuthPopUp/AuthPopUp'
 import WritingPopUp from '../WritingPopUp/WritingPopUp';
 import DrawerPopUp from '../DrawerPopUp/DrawerPopUp';
 import PostCatPopUp from '../PostCatPopUp/PostCatPopUp';
+import NotificationBox from '../NotificationBox/NotificationBox';
+import SecretPopUp from '../SecretPopUp/SecretPopUp';
 import './HomePage.css'
 
 const HomePage = () => {
@@ -42,6 +44,12 @@ const HomePage = () => {
 
           {activeModal === "POSTCAT_COMPONENT" && (
             <PostCatPopUp onClose={() => setActiveModal(null)}></PostCatPopUp>
+          )}
+          {activeModal === "NOTIFICATION_COMPONENT" && (
+            <NotificationBox onClose={() => setActiveModal(null)}></NotificationBox>
+          )}
+          {activeModal === "SECRET_COMPONENT" && (
+            <SecretPopUp onClose={() => setActiveModal(null)}></SecretPopUp>
           )}
         </div>
       )}

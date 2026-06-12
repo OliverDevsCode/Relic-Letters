@@ -58,6 +58,14 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
       if (event.type === "OPEN_POST_OPTIONS") {
         setActiveModal("POSTCAT_COMPONENT");
       }
+
+      if (event.type === "NOTIFICATION_INTERFACE") {
+        setActiveModal("NOTIFICATION_COMPONENT");
+      }
+
+      if (event.type === "SECRET_INTERFACE") {
+        setActiveModal("SECRET_COMPONENT");
+      }
       
       if (event.type === "OPEN_POST_OFFICE") {
         if (userLoggedIn) {

@@ -1,0 +1,127 @@
+/* Container for the entire notification box (Terminal style) */
+.notification-box {
+  position: absolute; /* or fixed/relative depending on your navigation bar layout */
+  top: 60px;
+  right: 20px;
+  width: 350px;
+  max-height: 450px;
+  overflow-y: auto;
+  background-color: var(--bg-main, #1a1211); /* Fallback to a dark retro background if not set */
+  border: 2px solid var(--border);
+  box-shadow: 0px 0px 15px var(--border);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10010; /* Places it nicely on top of common page elements */
+  box-sizing: border-box;
+}
+
+/* Retro Header style for "Notifications" title */
+.notification-box h3 {
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0 0 16px 0;
+  font-size: 1.2rem;
+  color: var(--text-heading);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0px #1a1211;
+}
+
+/* Retro Close button (X) in the top right */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: 'Courier New', Courier, monospace;
+  background: transparent;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--text-heading);
+  cursor: pointer;
+  padding: 2px 6px;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: var(--border);
+  color: var(--bg-main);
+  box-shadow: 0px 0px 8px var(--border);
+}
+
+.close-btn:active {
+  transform: scale(0.95);
+}
+
+/* Container for each individual notification entry */
+.notification-view {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+  background-color: rgba(255, 255, 255, 0.02);
+  /* Bulletproof translucent border using modern CSS color-mix */
+  border: 1px solid color-mix(in srgb, var(--border) 20%, transparent);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Notification text/message formatting */
+.notification-view p:nth-child(1) {
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-heading);
+  padding-right: 75px; /* Keeps long titles from bleeding behind the delete button */
+  word-break: break-word;
+}
+
+/* Timestamp entry formatting */
+.notification-view p:nth-child(2) {
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--text-heading) 50%, transparent); /* Dims the timestamp slightly */
+}
+
+/* Terminal styled Delete button inside each notification row */
+.notification-view button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%); /* Centers the button perfectly vertically */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: transparent;
+  color: var(--text-heading);
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.notification-view button:hover {
+  background-color: var(--border);
+  color: var(--bg-main);
+  box-shadow: 0px 0px 8px var(--border);
+}
+
+.notification-view button:active {
+  transform: translateY(-50%) scale(0.95); /* Maintanes vertical align on active shrink */
+}
+
+/* Terminal style empty state text */
+.notification-box > p {
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  color: color-mix(in srgb, var(--text-heading) 40%, transparent);
+  font-size: 0.9rem;
+  margin: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

@@ -131,6 +131,16 @@ export default class Sprite {
           context.onTriggerAction({ type: "OPEN_POST_OFFICE" });
         }
       }
+      else if (hitbox.id === "post_box") {
+        if (context.onTriggerAction) {
+          context.onTriggerAction({ type: "NOTIFICATION_INTERFACE" });
+        }
+      }
+      else if (hitbox.id === "prior_ruins") {
+        if (context.onTriggerAction) {
+          context.onTriggerAction({ type: "SECRET_INTERFACE" });
+        }
+      }
       else if (hitbox.id === "postcat") {
         if (context.onTriggerAction) {
           context.onTriggerAction({ type: "OPEN_POST_OPTIONS" });
