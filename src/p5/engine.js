@@ -32,13 +32,15 @@ export const gameEngine = (p,reactCallbacks = {}) => {
     outdoorCam: null, indoorCam: null,
     outdoorMap: null, indoorMap: null,
     outdoorData: null, indoorData: null,
-    internalMap: null, internalCam: null, internalMapData: null
+    internalMap: null, internalCam: null, internalMapData: null,
+    get mainSprite() { return mainSprite; }
   };
 
   // 1. In p5.js 2.0, setup must be 'async'
   p.setup = async () => {
     const cnv = p.createCanvas(400, 400);
     cnv.class('centered-canvas');
+    cnv.parent(p.canvas.parentElement);
 
     // 2. Fetch and assign files concurrently using Promise.all + await
     // This replicates the old blocking behavior of preload() before the canvas draws.
@@ -99,7 +101,7 @@ export const gameEngine = (p,reactCallbacks = {}) => {
     p._gameEngineContext.outdoorData = outdoorData;
     p._gameEngineContext.indoorData = indoorData;
     p._gameEngineContext.postOfficeData = postOfficeData;
-
+  
     // Apply defaults
     p._gameEngineContext.internalMap = outdoorMap;
     p._gameEngineContext.internalCam = outdoorCam;
@@ -131,4 +133,11 @@ export const gameEngine = (p,reactCallbacks = {}) => {
     
     laserPointer.draw(tile_size, scale);
   };
+
+  p.resetPlayer = () => {
+    if (mainSprite) {
+      mainSprite.x = p.width / 2;
+      mainSprite.y = p.y ? p.height / 2 : 200;
+    }
+  }
 };

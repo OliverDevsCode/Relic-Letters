@@ -15,6 +15,7 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
   
   //  1. Create a mutable ref to hold the latest game action logic
   const gameActionRef = useRef(null);
+  const gameResetRef = useRef(null);
 
   //  2. Keep the action ref pointing to the absolute latest React state values
   useEffect(() => {
@@ -72,7 +73,7 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
             // Calculate pixel coordinates based on actual map tile positions
             // Tile (6, 9) is the ideal bottom-center entrance on your wood floor
             const spawnTileX = 6;
-            const spawnTileY = 9;
+            const spawnTileY = 7;
             const tileSize = ctx.tile_size * ctx.scale;
             
             const targetX = spawnTileX * tileSize;
@@ -91,7 +92,31 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
         }
       }
     };
+
+    gameResetRef.current = () => {
+      const p5Instance = instanceRef.current;
+      const ctx = p5Instance?._gameEngineContext;
+      const targetSprite = ctx?.mainSprite || p5Instance?.mainSprite;
+
+      if (p5Instance && targetSprite) {
+        // Read directly from the live p5 canvas dimensions 
+        // instead of depending on React state parameters
+        targetSprite.x = p5Instance.width / 2; 
+        targetSprite.y = p5Instance.height / 2;
+        
+        console.log("Cat reset successfully to:", targetSprite.x, targetSprite.y);
+      } else {
+        console.warn("Could not reset player: Game engine context or sprite is not fully loaded yet.");
+      }
+    };
+
   }, [userLoggedIn, setActiveModal]);
+
+  const handleResetClick = () => {
+    if (gameResetRef.current) {
+      gameResetRef.current();
+    }
+  };
 
   // 3. The canvas engine setup hook only runs once on component mount
   useEffect(() => {
@@ -127,10 +152,12 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
   }, []);
 
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      {/* Game Canvas Mount Node - no modals here to prevent p5 interference */}
-      <div ref={containerRef} style={{ display: "block" }} />
-    </div>
+  <div className="game-container-wrapper">
+    {/* Game Canvas Mount Node */}
+    <div ref={containerRef} />
+    {/* Reset Button */}
+    <button className="reset-sprite-pos" onClick={handleResetClick}>Reset Cat</button>
+  </div>
   );
 });
 

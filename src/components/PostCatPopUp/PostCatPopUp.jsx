@@ -60,6 +60,7 @@ const PostCatPopUp = ({ onClose }) => {
 
         <h1 className='post-cat-title'>Welcome to my purrst office!</h1>
         <h2 className='post-cat-subtitle'>My name is Prio</h2>
+        <h2 className='post-cat-subtitle'>Good to see you again {username}</h2>
         
         {/* Prio the Cat Visual Element */}
         <div className='post-cat-avatar-container'>
