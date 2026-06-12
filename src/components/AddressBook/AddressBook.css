@@ -1,0 +1,106 @@
+/* Container for the entire address book layout */
+.address-book-container {
+  font-family: 'Courier New', Courier, monospace;
+  border: 2px solid var(--border);
+  background-color: var(--bg-main, #0a0a0a);
+  padding: 24px;
+  max-width: 450px;
+  margin: 20px auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Retro Main Title */
+.address-book-container > p:first-of-type {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--text-heading);
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px dashed var(--border);
+  padding-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+/* Scrollable housing wrap so long lists don't break the wrapper viewport */
+.address-cards-list {
+  max-height: 280px;
+  overflow-y: auto;
+  margin-bottom: 4px;
+  padding-right: 4px;
+}
+
+/* Empty State Message Styling */
+.address-book-container p:not(:first-of-type) {
+  font-size: 1rem;
+  color: var(--text-heading);
+  opacity: 0.6;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 30px 0;
+  letter-spacing: 2px;
+}
+
+/* Form block for adding a new contact */
+.add-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px dashed var(--border);
+  padding: 14px;
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+/* Terminal styled inputs matching the main container theme */
+.add-contact-form input {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  padding: 8px;
+  background-color: var(--bg-main, #0a0a0a);
+  color: var(--text-heading);
+  border: 2px solid var(--border);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-contact-form input::placeholder {
+  color: var(--text-heading);
+  opacity: 0.4;
+}
+
+/* Layout system buttons (Close, Add Address, Save Address) */
+.address-book-container > button,
+.add-contact-form button {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: transparent;
+  color: var(--text-heading);
+  border: 2px solid var(--border);
+  padding: 10px 20px;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hover state for a bright terminal highlight / glow */
+.address-book-container > button:hover,
+.add-contact-form button:hover {
+  background-color: var(--border);
+  color: var(--bg-main);
+  box-shadow: 0px 0px 8px var(--border);
+}
+
+/* Active press state */
+.address-book-container > button:active,
+.add-contact-form button:active {
+  transform: scale(0.98);
+}

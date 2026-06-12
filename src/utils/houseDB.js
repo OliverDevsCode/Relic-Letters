@@ -23,13 +23,21 @@ async function getExisting(houseCheckObj) {
     );
 
     const querySnapshot = await getDocs(q);
-    
-    // If it's not empty, someone already claimed it!
-    return !querySnapshot.empty;
+
+    const isTaken = !querySnapshot.empty;
+    const houseId = isTaken ? querySnapshot.docs[0].id : null;
+    const postcode = isTaken ? querySnapshot.docs[0].postcode : null;
+
+    return {
+      houseId,
+      isTaken,
+      postcode
+    };
   } catch (error) {
     console.error("Error checking for existing house:", error);
     return true; // Safety guardrail
   }
 }
+
 
 export { getExisting };

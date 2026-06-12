@@ -1,5 +1,7 @@
-import { db } from "./firebaseConfig";
+import { db, messaging } from "./firebaseConfig";
 import { doc,setDoc,getDocs,getDoc,addDoc,updateDoc,collection,query,where,deleteDoc,orderBy } from "firebase/firestore";
+
+import { getExisting } from "./houseDB";
 
 async function createUser(userObj) {
   if(!userObj){
@@ -184,5 +186,132 @@ async function getUserDoc(userId) {
   }
 }
 
+async function getUserContacts(userId){
+  if(!userId){
+    console.error("No userId provided, cannot fetch contacts")
+    return false;
+  }
 
-export {createUser,saveLetter,sendLetter,getUserDoc,getDraftLetters,getRecievedLetters};
+  let contacts = [];
+
+  //retrieve all docs from /users/contacts
+  //if empty return no contacts found
+
+  //if .length > 0; match .houseId with /houses/houseId to find them all
+  //data formatted like in return {savedName,houseNumber,streetName,postcode}
+
+  try {
+    // 1. Retrieve all docs from /users/{userId}/contacts
+    // (Assuming contacts is a subcollection of the user document)
+    const contactsRef = collection(db, 'users', userId, 'contacts');
+    const contactsSnapshot = await getDocs(contactsRef);
+
+    if (contactsSnapshot.empty) {
+      console.log("No contacts found");
+      return [];
+    }
+
+    // Map through snapshot to get the raw contact data (which includes houseId)
+    const contactDocs = contactsSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    // 2. If length > 0, match .houseId with /houses/{houseId} to find them all
+    const formattedContacts = await Promise.all(
+      contactDocs.map(async (contact) => {
+        if (!contact.houseId) {
+          // Fallback if a contact doesn't have a houseId linked yet
+          return {
+            savedName: contact.savedName || "Unknown Contact",
+            houseNumber: "",
+            streetName: "",
+            postcode: ""
+          };
+        }
+
+        // Fetch the house document from the top-level /houses collection
+        const houseDocRef = doc(db, 'houses', contact.houseId);
+        const houseSnapshot = await getDoc(houseDocRef);
+        
+        const houseData = houseSnapshot.exists() ? houseSnapshot.data() : {};
+
+        // 3. Format data exactly like your AddressCard expects
+        return {
+          savedName: contact.savedName || "Unknown Contact",
+          houseNumber: houseData.houseNumber || "N/A",
+          cityName: houseData.cityName || "N/A",
+          postcode: houseData.postcode || "N/A"
+        };
+      })
+    );
+
+    return formattedContacts;
+
+  } catch (error) {
+    console.error("Error fetching user contacts from Firestore:", error);
+    return false;
+  }
+
+}
+
+async function addContactToContacts(savedName,houseNumber,streetName,cityName,userId){
+  if(!userId){
+    console.error("Insuffcient address")
+    return {error:true,message:"No userId please relogin"}
+  }
+  if(!savedName || !houseNumber || !streetName || !cityName){
+    console.error("Insuffcient address")
+    return {error:true,message:"Insuffcient Address"}
+  }
+
+  try {
+    const toCheck = {
+      houseNumber,
+      streetName,
+      cityName
+    }
+    console.log("looking for house",toCheck)
+    const existingHouse = await getExisting(toCheck);
+    console.log("house match:",existingHouse);
+    if(!existingHouse.isTaken){
+      return {error:true,message:"Address doesn't exist"}
+      console.error("no existing house")
+    }
+
+    //write to user/contacts
+    //{savedName,houseId}
+    try {
+
+      const contactRef = doc(db, 'users', userId, 'contacts', existingHouse.houseId);
+      
+      await setDoc(contactRef, {
+        savedName: savedName,
+        houseId: existingHouse.houseId
+      });
+
+      console.log("Contact successfully linked to house profile:", existingHouse.houseId);
+      
+      return { 
+        success: true, 
+        message: "Contact added successfully", 
+        contactId: existingHouse.houseId,
+        postcode:existingHouse.postcode
+      };
+
+    } catch (error) {
+      console.error("Failed to write contact link to Firestore:", error);
+      return { error: true, message: "Database write failed" };
+    }
+    
+
+    console.log(existingHouse);
+  } catch (error) {
+    console.error(error);
+    return {error:true,message:error}
+  }
+
+}
+
+
+export {createUser,saveLetter,sendLetter,getUserDoc,getDraftLetters,getRecievedLetters,getUserContacts,addContactToContacts};

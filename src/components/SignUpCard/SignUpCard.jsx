@@ -58,9 +58,9 @@ const SignUpCard = ({onSuccess}) => {
     try {
 
       const houseObj = { houseNumber, streetName, cityName };
-      const isHouseTaken = await getExisting(houseObj);
+      const houseData = await getExisting(houseObj);
       
-      if (isHouseTaken) {
+      if (houseData.isTaken) {
         setError("Someone has already moved into that house number on this street!");
         return;
       }

@@ -6,6 +6,9 @@ import LetterCard from '../LetterCard/LetterCard';
 import { useAuth } from '../../contexts/authContext';
 import { attemptToast } from '../../utils/inAppNotifications';
 
+//address book
+import AddressBook from '../AddressBook/AddressBook';
+
 // api 
 import { postLetterAPI } from '../../utils/requests';
 
@@ -25,6 +28,7 @@ const PostLetterPopUp = ({setPosting,username }) => {
   const [streetName, setStreetName] = useState('');
   const [postCode, setPostCode] = useState('');
   const [previewLetter,setPreviewLetter] = useState(false);
+  const [addressBookPopUp,setAddressBookPopUp] = useState(false);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { currentUser } = useAuth();
@@ -134,9 +138,19 @@ const PostLetterPopUp = ({setPosting,username }) => {
   };
 
   return (
-    <div className='popup-backdrop' onClick={() => setPosting(false)}>
+    <div className='popup-backdrop'>
       {previewLetter && (
         <LetterPopUp letter={selectedLetter} closeLetter={handleCloseLetter}/>
+      )}
+      {addressBookPopUp && (
+        <div className="address-book-modal-layer">
+          <AddressBook 
+            setAddressBookPopUp={setAddressBookPopUp} 
+            setHouseNumber={setHouseNumber} 
+            setPostCode={setPostCode} 
+            setStreetName={setStreetName} 
+          />
+        </div>
       )}
       <div className='letter-tray' onClick={(e) => e.stopPropagation()}>
         
@@ -219,7 +233,7 @@ const PostLetterPopUp = ({setPosting,username }) => {
         {currentStep === 3 && (
           <div className='address-form' style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <p style={{ border: 'none', textShadow: 'none', fontSize: '0.95rem', margin: 0 }}>
-              Addressing: <strong>{selectedLetter?.title}</strong> via {postageType}
+              Posting: "<strong>{selectedLetter?.title}"</strong> via {postageType}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -258,6 +272,21 @@ const PostLetterPopUp = ({setPosting,username }) => {
             <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
               <button style={retroBtnStyle} onClick={() => setCurrentStep(2)} disabled={isSubmitting}>
                 [Back]
+              </button>
+              <button 
+                className='send-button' 
+                onClick={()=>{setAddressBookPopUp(true)}}
+                disabled={isSubmitting}
+                style={{
+                  ...retroBtnStyle,
+                  marginLeft: 'auto',
+                  backgroundColor: 'var(--text-heading)',
+                  color: 'var(--bg-main)',
+                  fontWeight: 'bold',
+                  opacity: isSubmitting ? 0.5 : 1
+                }}
+              >
+              Address Book
               </button>
               <button 
                 className='send-button' 
