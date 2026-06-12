@@ -10,6 +10,20 @@
 9,128,0,72,102 #house
 26,159,226,16,13 #rock
 28,0,102,116,70 #house 2
+29,214,7,40,30 #big rock - prior 
+30,259,49,20,12 #small rock - prior 
+31,480,114,25,40 #whole pillar ruin - prior 
+32,520,114,25,60 #broken pillar ruin - prior 
+33,479,171,67,50 #broken floor ruin - prior
+34,524,210,36,70 #broken turret ruin - prior  
+35,444,316,35,30 #logs  
+36,123,285,16,16 #small tree 
+37,187,243,125,90 #house 3 - npc house
+38,0,32,16,16 #path - grass-right
+39,64,32,16,16 #path - grass-left
+40,16,16,16,16 #corner grass-right
+41,48,16,16,16 #corner grass-left
+42,334,353,16,32 #post-box
 
 
 11,266,110,16,16 #wall corner-top-left
