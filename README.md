@@ -94,6 +94,22 @@ The idea of the application is conceptualised and structurally designed entirely
 * Safely wire up advanced external APIs and modular libraries.
 * Designing the frontend CSS layouts (because who *actually* enjoys debugging CSS flexbox?).
 
+## Asset Credits
+
+This project uses the following amazing asset packs to bring its world to life. Huge thanks to the creators!
+
+| Asset Pack | Creator / Source |
+| :--- | :--- |
+| **Mystic Lands Adventure Asset Pack** | [Pixy Fantasy Studios](https://pixyfantasystudios.itch.io/mystic-lands-adventure-asset-pack) |
+| **Pixel Art Interior Top-Down RPG Asset Pack** | [ZedPxl](https://zedpxl.itch.io/pixelart-interior-top-down-rpg-asset-pack) |
+| **Pixel Art Village Top-Down RPG Asset Pack** | [ZedPxl](https://zedpxl.itch.io/pixelart-village-top-down-rpg-asset-pack) |
+| **Pixel Art Top-Down Basic** | [Cainos](https://cainos.itch.io/pixel-art-top-down-basic) |
+
+---
+
+### 📄 Licensing Note
+All assets utilized in this project are used in accordance with their respective creators' licensing terms on itch.io. All rights, copyrights, and intellectual property belong to their original authors.
+
 ## Terms of Use & License
 Please use this software exclusively for good! 
 
