@@ -240,6 +240,7 @@ async function getUserContacts(userId){
         return {
           savedName: contact.savedName || "Unknown Contact",
           houseNumber: houseData.houseNumber || "N/A",
+          streetName: houseData.streetName || "N/A",
           cityName: houseData.cityName || "N/A",
           postcode: houseData.postcode || "N/A"
         };

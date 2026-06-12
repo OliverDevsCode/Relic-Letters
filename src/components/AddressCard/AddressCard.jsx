@@ -4,6 +4,8 @@ import './AddressCard.css';
 const AddressCard = ({ contact, handleSelectAddress}) => {
   const [viewAddress, setViewAddress] = useState(false);
 
+  console.log(contact);
+
   return (
     <div className='contact-card'>
       {/* Added the missing contact-name class here */}
