@@ -26,7 +26,7 @@ async function getExisting(houseCheckObj) {
 
     const isTaken = !querySnapshot.empty;
     const houseId = isTaken ? querySnapshot.docs[0].id : null;
-    const postcode = isTaken ? querySnapshot.docs[0].postcode : null;
+    const postcode = isTaken ? querySnapshot.docs[0].data().postcode : null;
 
     return {
       houseId,
