@@ -43,8 +43,7 @@ A custom medieval fantasy themed letter app I wrote for a special someone
 
 | The Post Office | Posting Experience | Address System |
 | :---: | :---: | :---: |
-| ![Post Office](docs/demo/post-office.gif) | ![Post Options](docs/demo/post-options.gif) |
-| ![Address book](docs/demo/address-book.gif) | |
+| ![Post Office](docs/demo/post-office.gif) | ![Post Options](docs/demo/post-options.gif) | ![Address book](docs/demo/address-book.gif) | |
 
 ## Tech Stack & Architecture
 
