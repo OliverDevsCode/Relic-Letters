@@ -4,6 +4,7 @@ import { gameEngine } from "../p5/engine";
 import { useAuth } from "../contexts/authContext";
 import { fetchFCMToken } from "../utils/useNotifications";
 import "./GameSketch.css";
+import { notifyUserToast } from "../utils/inAppNotifications";
 
 const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
   const containerRef = useRef(null);
@@ -60,7 +61,11 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
       }
 
       if (event.type === "NOTIFICATION_INTERFACE") {
-        setActiveModal("NOTIFICATION_COMPONENT");
+        if(userLoggedIn){
+          setActiveModal("NOTIFICATION_COMPONENT");
+        }else{
+          notifyUserToast("Hey you need an account first!","Enter the house to get started!");
+        }
       }
 
       if (event.type === "SECRET_INTERFACE") {
