@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/authContext';
 import { getRecievedLetters,getUserDoc } from '../../utils/userDB';
 import { RetroDrawer } from '../RetroDrawer/RetroDrawer';
 import LetterPopUp from '../LetterPopUp/LetterPopUp';
+import { attemptToast } from '../../utils/inAppNotifications';
 
 
 const DrawerPopUp = ({finished}) => {
@@ -22,7 +23,10 @@ const DrawerPopUp = ({finished}) => {
           setUsername(userData.username);
           console.log("userdata:",userData);
           //fetch letters
-          const userLetters = await getRecievedLetters(userId);
+          const promise = getRecievedLetters(userId);
+          //added so if error user can try again
+          attemptToast({title:"Enjoy the read!",message:"Right where you left them",promise});
+          const userLetters = await promise
           console.log(userLetters);
           setRecievedLetters(userLetters)
         } catch (error) {
