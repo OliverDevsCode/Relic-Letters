@@ -1,10 +1,11 @@
-import React, { useState,useEffect, useDebugValue } from 'react';
+import React, { useState,useEffect, useDebugValue, useId } from 'react';
 import RetroEditor from '../RetroEditor/RetroEditor';
 import { useAuth } from '../../contexts/authContext';
 import { saveLetter,getUserDoc,getDraftLetters } from '../../utils/userDB';
 import './WritingPopUp.css'; 
 import { data } from 'react-router-dom';
 import LetterTray from '../LetterTray/LetterTray';
+import { attemptToast } from '../../utils/inAppNotifications';
 
 const WritingPopUp = ({ finished }) => {
 
@@ -46,7 +47,9 @@ const WritingPopUp = ({ finished }) => {
     console.log("attempting to save:",letterObj);
 
     try {
-      const saveAttempt = await saveLetter(letterObj,userId);
+      const promise = saveLetter(letterObj,userId);
+      attemptToast({title:"Purfect All Saved",message:"So fur so good!",promise});
+      const saveAttempt = await promise;
       setLetterId(saveAttempt);
     } catch (error) {
       console.error(error);

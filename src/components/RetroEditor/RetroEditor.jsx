@@ -15,6 +15,12 @@ const RetroEditor = ({ onSave, placeholder = "USE YOUR IMAGINATION...", title,se
     setTitle(text);
   }
 
+  const handleNewLetter = () =>{
+    console.log("new letter")
+    setContent('');
+    setTitle('');
+  }
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (onSave) {
@@ -53,9 +59,12 @@ const RetroEditor = ({ onSave, placeholder = "USE YOUR IMAGINATION...", title,se
         />
         
         <div className="editor-footer">
-          <span className="char-counter">Character remaining: {charCount}/1000</span>
+          <span className="char-counter">Character remaining: {1000-charCount}/1000</span>
           <button type="button" className="editor-load-btn" onClick={handleLoadEntry}>
             Load Letter
+          </button>
+          <button type="button" className="editor-new-btn" onClick={handleNewLetter}>
+            New Letter
           </button>
           <button type="submit" className="editor-save-btn">
             Save Letter

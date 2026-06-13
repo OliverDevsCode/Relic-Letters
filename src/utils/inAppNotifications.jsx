@@ -36,7 +36,7 @@ function attemptToast({ title, message, promise }) {
       success: (data) => (
         <div className="letter-toast">
           <div className="toast-text">
-            <h4 className="toast-title">{title}: Sent</h4>
+            <h4 className="toast-title">{title}</h4>
             <p className="toast-message">{message}</p>
           </div>
         </div>

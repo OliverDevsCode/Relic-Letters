@@ -79,8 +79,8 @@ const PostLetterPopUp = ({setPosting,username }) => {
       const letterPromise = postLetterAPI(payload);
 
       attemptToast({
-        title:'Sent Letter',
-        message:'Stamped and ready!',
+        title:'Letter Posted',
+        message:'Stamped and off!',
         promise:letterPromise
       })
       const response = await letterPromise;
