@@ -7,7 +7,7 @@ import { parseTileFile, parseMapFile } from "./utils/helpers";
 export const gameEngine = (p,reactCallbacks = {}) => {
   // Constant Definitions
   const tile_size = 16;
-  const scale = 2;
+  let scale = 2;
 
   //cat audio
   let lastMeowCycle = -1; // Tracks which 20-second block we are currently in
@@ -32,7 +32,8 @@ export const gameEngine = (p,reactCallbacks = {}) => {
 
   // Bridge reference objects to make collisions dynamic
   p._gameEngineContext = {
-    tile_size, scale,
+    tile_size,
+    get scale() { return scale; },
     onTriggerAction: reactCallbacks.onTriggerAction || null,
     get currentMap() { return p._gameEngineContext.internalMap; },
     set currentMap(val) { p._gameEngineContext.internalMap = val; },
@@ -49,7 +50,17 @@ export const gameEngine = (p,reactCallbacks = {}) => {
 
   // 1. In p5.js 2.0, setup must be 'async'
   p.setup = async () => {
-    const cnv = p.createCanvas(400, 400);
+    //calculate square = screen_height*0.9
+    let canvasSize = p.windowHeight * 0.70;
+
+    if (canvasSize > p.windowWidth) {
+        canvasSize = p.windowWidth*0.95;
+    }
+    console.log(`canvasSize: ${canvasSize}`)
+    console.log(`dynamic scale = ${canvasSize/200}`)
+    //if results > width, square = width
+    scale = Math.round(canvasSize/200);
+    const cnv = p.createCanvas(canvasSize, canvasSize);
     cnv.class('centered-canvas');
     cnv.parent(p.canvas.parentElement);
 
