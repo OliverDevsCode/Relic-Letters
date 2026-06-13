@@ -5,8 +5,13 @@
     "reliability":10
   },
   {
-    "name":"pigeon",
+    "name":"owl",
     "time":1,
+    "reliability":8
+  },
+  {
+    "name":"pigeon",
+    "time":2,
     "reliability":7
   },
   {
