@@ -37,7 +37,7 @@ const LetterPopUp = ({ letter, closeLetter }) => {
 
           <footer className="letter-footer">
             <p className="letter-valediction">Sincerely,</p>
-            <p className="letter-sender">{letter.sender}</p>
+            <p className="letter-sender">{letter.sender ?? letter.senderName ?? "Unknown Sender"}</p>
           </footer>
         </article>
 
