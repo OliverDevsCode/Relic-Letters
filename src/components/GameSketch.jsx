@@ -65,6 +65,22 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
           setActiveModal("NOTIFICATION_COMPONENT");
         }else{
           notifyUserToast("Hey you need an account first!","Enter the house to get started!");
+          const p5Instance = instanceRef.current;
+          const ctx = p5Instance._gameEngineContext;
+          const spawnTileX = 4;
+          const spawnTileY = 6;
+          const tileSize = ctx.tile_size * ctx.scale;
+            
+          const targetX = spawnTileX * tileSize;
+          const targetY = spawnTileY * tileSize;
+
+          if (ctx.mainSprite) {
+              ctx.mainSprite.x = targetX;
+              ctx.mainSprite.y = targetY;
+            } else if (p5Instance.mainSprite) {
+              p5Instance.mainSprite.x = targetX;
+              p5Instance.mainSprite.y = targetY;
+            }
         }
       }
 
