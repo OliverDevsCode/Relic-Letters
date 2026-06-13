@@ -13,6 +13,11 @@ const SecretPopUp = ({onClose}) => {
     if(userLoggedIn){
       parseHidden();
     }
+
+    //play fanfare
+    const fanfare = new Audio('./audio/fanfare.mp3');
+    fanfare.volume = 0.4;
+    fanfare.play();
   },[])
 
   function parseHidden() {

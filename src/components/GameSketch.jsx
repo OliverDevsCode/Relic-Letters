@@ -105,12 +105,16 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
       const p5Instance = instanceRef.current;
       const ctx = p5Instance?._gameEngineContext;
       const targetSprite = ctx?.mainSprite || p5Instance?.mainSprite;
+      const targetCamera = ctx?.currentCam || p5Instance?.currentCam;
 
       if (p5Instance && targetSprite) {
         // Read directly from the live p5 canvas dimensions 
         // instead of depending on React state parameters
         targetSprite.x = p5Instance.width / 2; 
         targetSprite.y = p5Instance.height / 2;
+        //added reset cam too - might remove not sure
+        targetCamera.x = 0;
+        targetCamera.y = 0;
         
         console.log("Cat reset successfully to:", targetSprite.x, targetSprite.y);
       } else {

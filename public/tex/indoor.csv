@@ -19,7 +19,7 @@
 24,6,3       # drawer (Against the back wall)
 20,8,3       # desk (Next to drawer)
 21,8,4       # chair (Tucked in at desk)
-25,9,3       # plant-indoor (Top-right corner)
+25,9,8       # plant-indoor (Top-right corner)
 23,6,9       # rug-2 (Bottom center floor tile of the room)
 
 #HITBOXES

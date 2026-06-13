@@ -9,6 +9,17 @@ export const gameEngine = (p,reactCallbacks = {}) => {
   const tile_size = 16;
   const scale = 2;
 
+  //cat audio
+  let lastMeowCycle = -1; // Tracks which 20-second block we are currently in
+  let meowTriggerTime = 0; // The exact second chosen randomly to play the sound
+  let hasMeowedThisCycle = false; // Prevents duplicate meows in the same active window
+
+  //background audio
+  let playlist = [];
+  let currentTrackIndex = 0;
+  let bgMusic = null;
+  let isMusicPlaying = false;
+
   // Runtime Scope Variables
   let outdoorCam, indoorCam, postOfficeCam;
   let outdoorMap, indoorMap, postOfficeMap;
@@ -129,9 +140,76 @@ export const gameEngine = (p,reactCallbacks = {}) => {
     if (p.mouseIsPressed && mouseInCanvas) {
       mainSprite.move();
       ctx.currentCam.move(mainSprite, tile_size, scale);
+      laserPointer.draw(tile_size, scale);
+
+
+
+      //AUDIO ONLY BELOW NOT IMPORTNAT TO GAME LOGI
+
+      //random meow
+      const totalCycleMs = 20000; // 20 seconds total cycle length
+      const currentMs = p.millis();
+      
+      // Determine which 20-second cycle block we are currently in (0, 1, 2, etc.)
+      const currentCycle = Math.floor(currentMs / totalCycleMs);
+      // Find how many milliseconds have passed *inside* the current 20-second cycle (0 to 19999)
+      const timeInCycle = currentMs % totalCycleMs;
+
+      // If a new 20-second cycle has started, reset our triggers for this block
+      if (currentCycle !== lastMeowCycle) {
+        lastMeowCycle = currentCycle;
+        hasMeowedThisCycle = false;
+        // Pick a random second between 0 and 9 (the first 10 seconds of the cycle)
+        meowTriggerTime = getRandomInt(0, 9) * 1000; 
+      }
+
+      // Trigger the meow if:
+      // 1. We are still in the first 10 seconds of the cycle
+      // 2. We haven't meowed yet during this cycle
+      // 3. The cycle timer has passed our randomly selected trigger mark
+      if (timeInCycle < 10000 && !hasMeowedThisCycle && timeInCycle >= meowTriggerTime) {
+        const audioIndex = getRandomInt(1, 2);
+        const meow = new Audio(`/audio/meow-${audioIndex}.mp3`);
+        meow.volume = 0.4;
+        meow.play().catch(err => console.log("Audio playback prevented:", err));
+        
+        hasMeowedThisCycle = true; // Lock it down so it only fires once!
+      }
+
+      //bg audio
+      if (!isMusicPlaying) {
+        isMusicPlaying = true;
+
+        playlist = [
+          new Audio('/audio/bg-music-1.mp3'),
+          new Audio('/audio//bg-music-2.mp3')
+        ];
+
+        playlist.forEach(track => {
+          track.volume = 0.12; // Extra cozy and quiet
+        });
+
+        const playCurrentTrack = () => {
+          const track = playlist[currentTrackIndex];
+          
+          track.removeEventListener('ended', handleTrackEnded);
+          track.addEventListener('ended', handleTrackEnded);
+          
+          track.play().catch(err => {
+            console.log("Music blocked by browser layout engine:", err);
+            isMusicPlaying = false; // Reset so next click retries
+          });
+        };
+
+        const handleTrackEnded = () => {
+          currentTrackIndex = currentTrackIndex === 0 ? 1 : 0;
+          playCurrentTrack();
+        };
+
+        playCurrentTrack();
+      }
     }
     
-    laserPointer.draw(tile_size, scale);
   };
 
   p.resetPlayer = () => {
@@ -141,3 +219,8 @@ export const gameEngine = (p,reactCallbacks = {}) => {
     }
   }
 };
+
+function getRandomInt(min,max){
+  const num = (Math.round(Math.random()*(max-min))+min);
+  return num;
+}

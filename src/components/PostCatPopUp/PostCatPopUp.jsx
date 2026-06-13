@@ -4,6 +4,7 @@ import CollectLetterPopUp from '../CollectLetterPopUp/CollectLetterPopUp';
 import { getUserDoc } from '../../utils/userDB';
 import { useAuth } from '../../contexts/authContext';
 import './PostCatPopUp.css';
+import { mapRemove } from 'firebase/firestore/pipelines';
 
 const PostCatPopUp = ({ onClose }) => {
   const [prioSpeech, setPrioSpeech] = useState("Please choose from the following");
@@ -13,7 +14,7 @@ const PostCatPopUp = ({ onClose }) => {
   const [userId,setUserId] = useState('');
 
   const { currentUser } = useAuth();
-
+  
 
   useEffect(()=>{
     async function getUserInfo(){
@@ -24,6 +25,9 @@ const PostCatPopUp = ({ onClose }) => {
         setUsername(response.username);
       }
     }
+    //meow hello
+    const meow = new Audio('./audio/meow-1.mp3');
+    meow.play();
     getUserInfo()
   },[])
   

@@ -98,12 +98,17 @@ The idea of the application is conceptualised and structurally designed entirely
 
 This project uses the following amazing asset packs to bring its world to life. Huge thanks to the creators!
 
-| Asset Pack | Creator / Source |
+| Asset Pack / Audio | Creator / Source |
 | :--- | :--- |
 | **Mystic Lands Adventure Asset Pack** | [Pixy Fantasy Studios](https://pixyfantasystudios.itch.io/mystic-lands-adventure-asset-pack) |
 | **Pixel Art Interior Top-Down RPG Asset Pack** | [ZedPxl](https://zedpxl.itch.io/pixelart-interior-top-down-rpg-asset-pack) |
 | **Pixel Art Village Top-Down RPG Asset Pack** | [ZedPxl](https://zedpxl.itch.io/pixelart-village-top-down-rpg-asset-pack) |
 | **Pixel Art Top-Down Basic** | [Cainos](https://cainos.itch.io/pixel-art-top-down-basic) |
+| **Opening Letter Sound Effect** | [Pixabay / Film Special Effects](https://pixabay.com/sound-effects/film-special-effects-opening-letter-69854/) |
+| **Musical Main Theme Track** | [Pixabay / Musical Main Theme](https://pixabay.com/sound-effects/musical-main-theme-68815/) |
+| **Cartoon Music & Game SFX** | [Cartoon Music Game SFX on Pixabay](https://pixabay.com/users/cartoon-music-game-sfx-54195863/) |
+| **Freesound Community Audio** | [Freesound Community on Pixabay](https://pixabay.com/users/freesound_community-46691455/) |
+| **Medieval Horizons Audio Collection** | [Medieval Horizons on Pixabay](https://pixabay.com/users/medieval_horizons-52313478/) |
 
 ---
 

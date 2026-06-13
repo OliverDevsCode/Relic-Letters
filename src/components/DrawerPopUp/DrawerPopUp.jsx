@@ -37,6 +37,9 @@ const DrawerPopUp = ({finished}) => {
     for (let index = 0; index < recievedLetters.length; index++) {
       const letter = recievedLetters[index];
       if(letter.letterId === id){
+        //play sound effect
+        let effect = new Audio('/audio/open-letter.mp3');
+        effect.play();
         setSelectedLetter(letter);
       } 
     }
