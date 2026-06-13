@@ -1,3 +1,5 @@
+<img width="1164" height="556" alt="logo-with-no-bg" src="https://github.com/user-attachments/assets/1cae24a8-8d3b-4526-8479-21346265c0f1" />
+
 # Relic Letters
 A custom medieval fantasy themed letter app I wrote for a special someone
 
