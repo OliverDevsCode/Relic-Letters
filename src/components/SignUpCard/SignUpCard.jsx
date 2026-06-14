@@ -112,12 +112,14 @@ const SignUpCard = ({onSuccess}) => {
           className='password-field' 
           type='password' 
           placeholder='password'
+          autoComplete='new-password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <input 
           className='password-field' 
           type='password' 
+          autoComplete='new-password'
           placeholder='confirm password'
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
