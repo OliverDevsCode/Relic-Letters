@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './components/HomePage/HomePage' 
 import LegalPage from './components/LegalPage/LegalPage';
 import { AuthProvider } from './contexts/authContext';
+import { Analytics } from "@vercel/analytics/react"
 
 import { messaging } from './utils/firebaseConfig';
 import { onMessage } from 'firebase/messaging';
@@ -19,6 +20,7 @@ function App() {
   }, []);
 
   return (
+    <>
     <AuthProvider>
       <BrowserRouter>
         <Routes>
@@ -28,6 +30,9 @@ function App() {
         <Toaster />
       </BrowserRouter>
     </AuthProvider>
+    <Analytics/>
+    </>
+    
   )
 }
 
