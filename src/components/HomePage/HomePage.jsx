@@ -7,16 +7,24 @@ import PostCatPopUp from '../PostCatPopUp/PostCatPopUp';
 import NotificationBox from '../NotificationBox/NotificationBox';
 import SecretPopUp from '../SecretPopUp/SecretPopUp';
 import WelcomePopUp from '../WelcomePopUp/WelcomePopUp';
+import { useAuth } from '../../contexts/authContext';
 import './HomePage.css'
 
 const HomePage = () => {
   const [activeModal, setActiveModal] = useState(null)
   const [welcome,setWelcome] = useState(true);
 
+  const {userLoggedIn} = useAuth();
+
   return (
     <div className="homepage-container">
       <div className='title-container'>
-        <h1>Welcome to Relic Letters</h1>
+        {userLoggedIn && (
+          <h1>Relic Letters</h1>
+        )}
+        {!userLoggedIn && (
+          <h1>Welcome to Relic Letters</h1>
+        )}
       </div>
       {welcome && (
       <WelcomePopUp onClose={setWelcome}/>

@@ -14,9 +14,9 @@
 .title-container {
   font-family: 'Retro16Bit';
   display: block;
-  width: 100%;           /* 🌟 Added: Tells the box to take up full horizontal space */
-  text-align: center;    /* 🌟 Added: Centers everything inside this bounding block */
-  margin-bottom: 30px;
+  width: 100%;           
+  text-align: center;  
+  margin-bottom: 10px;
 }
 
 /* Styled heading matching a retro fantasy title screen */
@@ -27,7 +27,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;
-  text-align: center;    /* 🌟 Added: Double-enforces text rendering alignment */
+  text-align: center;    
   text-shadow: 3px 3px 0px #1a1211;
   animation: gentleFloat 4s ease-in-out infinite;
 }
