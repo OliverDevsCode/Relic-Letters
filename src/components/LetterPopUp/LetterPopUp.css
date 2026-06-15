@@ -18,7 +18,7 @@
 .letter-container {
   position: relative;
   width: 100%;
-  max-width: 550px;
+  max-width: 750px;
   animation: floatIn 0.35s ease-out;
 }
 

@@ -16,7 +16,6 @@ const LetterPopUp = ({ letter, closeLetter }) => {
     }
   };
 
-  // 2. Use createPortal to mount this directly into the document body
   return ReactDOM.createPortal(
     <div className="letter-modal-overlay" onClick={closeLetter}>
       <div className="letter-container" onClick={(e) => e.stopPropagation()}>
@@ -43,7 +42,7 @@ const LetterPopUp = ({ letter, closeLetter }) => {
 
       </div>
     </div>,
-    document.body // 3. Target the global body element
+    document.body 
   );
 };
 
