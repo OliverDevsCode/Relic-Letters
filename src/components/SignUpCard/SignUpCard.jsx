@@ -124,25 +124,25 @@ const SignUpCard = ({onSuccess}) => {
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
         />
-        <p>Choosing your house!</p>
+        <p>Choosing your fantasy house!</p>
         <input 
           className='house-num-field' 
           type='text'
-          placeholder='Enter new house number'
+          placeholder='Enter fantasy house number'
           value={houseNumber}
           onChange={(e) => setHouseNumber(e.target.value)}
         />
         <input 
           className='street-field' 
           type='text'
-          placeholder='Enter street name'
+          placeholder='Enter fantasy street name'
           value={streetName}
           onChange={(e) => setStreetName(e.target.value)}
         />
         <input 
           className='city-field' 
           type='text'
-          placeholder='Enter city name'
+          placeholder='Enter fantasy city name'
           value={cityName}
           onChange={(e) => setCityName(e.target.value)}
         />
