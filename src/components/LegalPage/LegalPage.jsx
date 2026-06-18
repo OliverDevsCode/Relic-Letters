@@ -70,6 +70,43 @@ const LegalPage = () => {
           </p>
         </section>
 
+        {/* --- PRIVACY POLICY SECTION --- */}
+        <div className='terminal-divider'>---------------------------------------</div>
+        
+        <header className='legal-header'>
+          <h1>[ LEGAL_PROTOCOL_DOC_02 ]</h1>
+          <h2>PRIVACY POLICY & DATA PROTOCOLS</h2>
+          <div className='terminal-divider'>---------------------------------------</div>
+        </header>
+
+        <section className='legal-section'>
+          <h3>1. DATA COLLECTION & STORAGE</h3>
+          <p>
+            We only collect information that you directly provide to us. Your credentials are managed securely via Firebase Authentication, and your letters or user-generated content are stored within Google Cloud Firestore. We do not track, scrape, or extract any data beyond what you explicitly type into the station interface.
+          </p>
+        </section>
+
+        <section className='legal-section'>
+          <h3>2. COOKIE-FREE TELEMETRY</h3>
+          <p>
+            We monitor network performance using Vercel Analytics. This system operates entirely without cookies and does not gather, store, or monitor any Personally Identifiable Information (PII) or track your device across alternative network pathways.
+          </p>
+        </section>
+
+        <section className='legal-section'>
+          <h3>3. THIRD-PARTY DISCLOSURE EXCLUSION</h3>
+          <p>
+            We do not trade, sell, lease, or distribute your correspondence records or identity logs to external advertising or third-party entities. Data is routed purely through our infrastructure providers (Firebase and Vercel) strictly to maintain active terminal applications.
+          </p>
+        </section>
+
+        <section className='legal-section'>
+          <h3>4. DELETION RIGHTS & INQUIRIES</h3>
+          <p>
+            You maintain absolute control over your digital artifacts. You may update or delete your files at any point via your account dashboard. For overarching data purge inquiries or registry questions, connect directly with our network node at: <strong>privacy@relicletters.com</strong>.
+          </p>
+        </section>
+
       </div>
 
         <footer className='legal-footer'>
