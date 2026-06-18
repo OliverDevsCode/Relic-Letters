@@ -1,6 +1,8 @@
 {
   "short_name": "Relic letters",
   "name": "Relic letters",
+  "description": "Relic Letters - Keeping connection fun and meaningful",
+  "scope": "/",
   "icons": [
     {
       "src": "/icons/logo-192.png",

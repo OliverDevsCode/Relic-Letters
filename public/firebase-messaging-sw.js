@@ -25,7 +25,7 @@ messaging.onBackgroundMessage(function(payload) {
 
 
 const CACHE = "pwabuilder-page";
-const offlineFallbackPage = "/"; 
+const offlineFallbackPage = "/index.html";
 
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
@@ -40,7 +40,7 @@ self.addEventListener('install', async (event) => {
   );
 });
 
-if (workbox.navigationPreload.isSupported()) {
+if (typeof workbox !== 'undefined' && workbox.navigationPreload?.isSupported()) {
   workbox.navigationPreload.enable();
 }
 
