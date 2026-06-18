@@ -22,3 +22,20 @@ messaging.onBackgroundMessage(function(payload) {
   };
   self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+
+self.addEventListener('fetch', (event) => {
+  if (!event.request.url.startsWith('http')) {
+    return; 
+  }
+
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      if (event.request.mode === 'navigate') {
+        return new Response("Offline content not available", {
+          headers: { 'Content-Type': 'text/html' }
+        });
+      }
+    })
+  );
+});
