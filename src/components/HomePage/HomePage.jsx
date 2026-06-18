@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GameSketch from '../GameSketch' 
 import AuthPopUp from '../AuthPopUp/AuthPopUp'
 import WritingPopUp from '../WritingPopUp/WritingPopUp';
@@ -14,7 +14,17 @@ const HomePage = () => {
   const [activeModal, setActiveModal] = useState(null)
   const [welcome,setWelcome] = useState(true);
 
-  const {userLoggedIn} = useAuth();
+  const {currentUser,userLoggedIn} = useAuth();
+
+
+  useEffect(()=>{
+    if(currentUser?.uid === import.meta.env.VITE_SECRET_UID || !userLoggedIn){
+      setWelcome(true);
+    }else{
+      setWelcome(false);
+    }
+  },[])
+
 
   return (
     <div className="homepage-container">

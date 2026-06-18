@@ -6,18 +6,17 @@ const SecretPopUp = ({onClose}) => {
 
   const [hiddenMessage,setHiddenMessage] = useState({})
 
-  const {userLoggedIn} = useAuth();
+  const {currentUser,userLoggedIn} = useAuth();
 
 
   useEffect(()=>{
-    if(userLoggedIn){
+    if(currentUser?.uid === import.meta.env.VITE_SECRET_UID){
       parseHidden();
+      //play fanfare
+      const fanfare = new Audio('./audio/fanfare.mp3');
+      fanfare.volume = 0.4;
+      fanfare.play();
     }
-
-    //play fanfare
-    const fanfare = new Audio('./audio/fanfare.mp3');
-    fanfare.volume = 0.4;
-    fanfare.play();
   },[])
 
   function parseHidden() {
