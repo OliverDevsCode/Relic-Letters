@@ -8,6 +8,7 @@ const LetterPopUp = ({ letter, closeLetter }) => {
   if (!letter || !letter.title) return null; // Ensure we have a valid letter object
 
   const formatDate = (dateString) => {
+    console.log("date:",dateString)
     try {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       return new Date(dateString).toLocaleDateString('en-US', options);
@@ -26,7 +27,7 @@ const LetterPopUp = ({ letter, closeLetter }) => {
 
         <article className="letter-paper">
           <header className="letter-header">
-            <span className="letter-date">{formatDate(letter.date)}</span>
+            <span className="letter-date">{formatDate(letter.createdAt)}</span>
           </header>
 
           <main className="letter-body">
