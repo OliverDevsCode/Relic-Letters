@@ -70,7 +70,7 @@ Follow these steps to get your local development environment up and running:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/yourusername/relic-letters.git](https://github.com/yourusername/relic-letters.git)
+   git clone [https://github.com/oliverdevscode/relic-letters.git](https://github.com/oliverdevscode/relic-letters.git)
 
 2. **Navigate into the project directory:**
    ```bash
