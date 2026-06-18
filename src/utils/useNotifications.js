@@ -8,8 +8,8 @@ export async function fetchFCMToken(userId) {
     if (permission !== 'granted') return;
 
     // Register SW and wait until it's fully active
-    await navigator.serviceWorker.register('/firebase-messaging-sw.js');
-    const registration = await navigator.serviceWorker.ready; // ← key change
+    await navigator.serviceWorker.register('/service-worker.js');
+    const registration = await navigator.serviceWorker.ready;
 
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
