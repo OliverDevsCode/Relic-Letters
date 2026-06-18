@@ -23,6 +23,10 @@
 23,6,9       # rug-2 (Bottom center floor tile of the room)
 
 #HITBOXES
+rug,7,10
 rug,6,10
+rug,4,10
+rug,3,10
+rug,5,10
 chair,8,4
 drawer,6,4
