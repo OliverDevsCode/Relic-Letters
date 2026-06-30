@@ -97,6 +97,38 @@
   transition: all 0.2s ease;
 }
 
+/* Container to space out the destruction endpoint */
+.delete-account-wrapper {
+  margin: 30px 0 15px 0;
+  text-align: center;
+}
+
+/* Retro Danger Button */
+.delete-account-btn {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  background-color: transparent;
+  /* Destructive alert color fallback to crimson red */
+  color: var(--destructive, #ff5555); 
+  border: 2px solid var(--destructive, #ff5555);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 1px;
+}
+
+/* Hover state mimicking an overloaded circuit/terminal alert */
+.delete-account-btn:hover {
+  background-color: var(--destructive, #ff5555);
+  color: var(--bg-surface, #2c1e1c);
+  box-shadow: 0px 0px 12px var(--destructive, #ff5555);
+}
+
+.delete-account-btn:active {
+  transform: scale(0.97);
+}
+
 .legal-back-btn:hover {
   background-color: var(--border, #dfa97e);
   color: var(--bg-surface, #2c1e1c);

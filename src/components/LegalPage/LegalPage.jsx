@@ -1,14 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Optional: if using react-router
+import { doDeleteUserAccount } from '../../utils/auth';
+import { useAuth } from '../../contexts/authContext';
+
 import './LegalPage.css';
+import { deleteHouse} from '../../utils/houseDB';
+import { deleteUserDoc } from '../../utils/userDB';
+import { notifyUserToast } from '../../utils/inAppNotifications';
+import LoginCard from '../LoginCard/LoginCard';
 
 const LegalPage = () => {
+  const {currentUser,userLoggedIn} = useAuth();
+  const [showLogin,setShowLogin] = useState(false);
+  const navigate = useNavigate();
+
+
   const handleBack = () => {
     window.history.back();
   };
 
+  const initiateDeleteSequence = () => {
+    notifyUserToast("Verification Required", "Please re-authenticate to confirm account purging.");
+    setShowLogin(true);
+  };
+
+  const finalizeAccountDeletion = async() => {
+    if(!userLoggedIn){
+      return;
+    }
+    const userId = currentUser?.uid
+    try {
+      const user = await deleteUserDoc(userId);
+      const house = await deleteHouse(userId);
+      await doDeleteUserAccount();
+      notifyUserToast("Terminal Cleared", "Your profile and houses have been completely removed.");
+      navigate('/');
+    } catch (error) {
+      console.error("error",error);
+      notifyUserToast("Error Deleting Account","Contact privacy@relicletters.com");
+    }
+  };
+
+  
+
   return (
     <div className='legal-screen-wrapper'>
+      {showLogin && (
+        <LoginCard 
+          onSuccess={() =>{setShowLogin(false)
+                        finalizeAccountDeletion()
+          }}
+        />
+      )}
       <div className='legal-container'>
         
         <header className='legal-header'>
@@ -103,16 +146,24 @@ const LegalPage = () => {
         <section className='legal-section'>
           <h3>4. DELETION RIGHTS & INQUIRIES</h3>
           <p>
-            You maintain absolute control over your digital artifacts. You may update or delete your files at any point via your account dashboard. For overarching data purge inquiries or registry questions, connect directly with our network node at: <strong>privacy@relicletters.com</strong>.
+            You maintain absolute control over your digital artifacts. You may update or delete your files at any point via the button below. For overarching data purge inquiries or registry questions, connect directly with our network node at: <strong>privacy@relicletters.com</strong>.
           </p>
         </section>
+
+        {userLoggedIn && (
+        <div className='delete-account-wrapper'>
+          <button className='delete-account-btn' onClick={initiateDeleteSequence}>
+            [ PERMANENTLY_DELETE_ACCOUNT ]
+          </button>
+        </div>
+      )} 
 
       </div>
 
         <footer className='legal-footer'>
           <div className='terminal-divider'>---------------------------------------</div>
           <p className='legal-stamp'>AUTHORIZED STATIONERY // RELIC LETTERS 2026</p>
-          <button className='legal-back-btn' onClick={handleBack}>
+          <button className='legal-back-btn' onClick={()=>{promptLogin()}}>
             [ RETURN_TO_DESK ]
           </button>
         </footer>

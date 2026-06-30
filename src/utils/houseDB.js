@@ -38,6 +38,26 @@ async function getExisting(houseCheckObj) {
     return true; // Safety guardrail
   }
 }
+async function deleteHouse(userId) {
+  if(!userId){
+    return false;
+  }
+  //delete user document
+  const houseRef = collection(db,"houses");
+  const q = query(houseRef,where("occupiedBy","==",userId))
+  const querySnapshot = await getDocs(q);
+  if(querySnapshot.empty){
+    return false;
+  }
+
+  const deletePromises = querySnapshot.docs.map((documentDoc) => 
+      deleteDoc(doc(db, "houses", documentDoc.id))
+    );
+    
+    await Promise.all(deletePromises);
+  return true; 
+
+}
 
 
-export { getExisting };
+export { getExisting,deleteHouse };

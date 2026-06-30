@@ -366,5 +366,20 @@ async function deleteNotification(notificationId,userId){
   }
 }
 
+async function deleteUserDoc(userId) {
+  if(!userId){
+    return false;
+  }
+  //delete user document
+  try {
+    const userDocRef = doc(db, "users", userId);
+    await deleteDoc(userDocRef);
+    return true;
+  } catch (error) {
+    console.error("Error deleting user document:", error);
+    return false;
+  }
+}
 
-export {createUser,saveLetter,sendLetter,getUserDoc,getDraftLetters,getRecievedLetters,getUserContacts,addContactToContacts,getNotifications,deleteNotification};
+
+export {createUser,saveLetter,sendLetter,getUserDoc,getDraftLetters,getRecievedLetters,getUserContacts,addContactToContacts,getNotifications,deleteNotification,deleteUserDoc};
