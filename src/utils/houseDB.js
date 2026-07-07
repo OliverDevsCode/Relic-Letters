@@ -59,5 +59,38 @@ async function deleteHouse(userId) {
 
 }
 
+/**
+ * Finds the house occupied by a specific user.
+ * @param {string} userId - The ID of the user.
+ * @returns {object|false} The house data (with ID) or false if not found.
+ */
+async function findHouse(userId) {
+  if (!userId) {
+    return false;
+  }
 
-export { getExisting,deleteHouse };
+  try {
+    const houseRef = collection(db, "houses");
+    
+    const q = query(houseRef, where("occupiedBy", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return false;
+    }
+
+    const houseDoc = querySnapshot.docs[0];
+    
+    return {
+      id: houseDoc.id,      
+      ...houseDoc.data()    
+    };
+
+  } catch (error) {
+    console.error("Error finding house: ", error);
+    return false;
+  }
+}
+
+
+export { getExisting,deleteHouse,findHouse};

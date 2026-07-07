@@ -1,0 +1,180 @@
+/* src/components/ShareCard/ShareCard.css */
+
+/* Main Card Container */
+.share-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--bg-main); /* Matches LetterCard theme */
+  border: 2px solid var(--border);
+  padding: 16px;
+  box-sizing: border-box;
+  max-width: 400px; /* Optional safety layout constraint */
+}
+
+/* Row configuration to align text and its specific copy button */
+.share-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Base text layout matching LetterCard font constraints */
+.share-card p {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  color: var(--text-body);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+}
+
+/* Bold prefix labels to highlight keys */
+.share-card .label {
+  font-weight: bold;
+  color: var(--text-heading);
+  text-transform: uppercase;
+}
+
+/* Base styling rules for ALL buttons inside the card */
+.share-card button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+/* Copy Button Styling (Subtle/Inline style variant) */
+.share-row button {
+  background-color: transparent;
+  color: var(--text-body);
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  min-width: 75px; /* Keeps layout completely still when changing to "Copied!" */
+}
+
+/* Large Main Close Button Styling (Matches Open Button color profile) */
+.share-card .close-btn {
+  background-color: var(--accent);
+  color: white;
+  padding: 8px 14px;
+  margin-top: 8px;
+  align-self: stretch; /* Spans across the bottom */
+  text-transform: uppercase;
+}
+
+/* Hover Effects matching the classic LetterCard layout pop */
+.share-card button:hover {
+  background-color: var(--text-heading);
+  color: var(--bg-main); /* Inverts text color for clean contrast on dark bg variables */
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0px var(--border);
+}
+
+/* Exception logic to keep Close button text white on hover */
+.share-card .close-btn:hover {
+  color: white;
+}
+
+/* Active pressed down animation states */
+.share-card button:active {
+  transform: translate(0, 0);
+  box-shadow: 0px 0px 0px var(--border);
+}
+
+/* src/components/ShareCard/ShareCard.css */
+
+/* Main Card Container */
+.share-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--bg-main);
+  border: 2px solid var(--border);
+  padding: 16px;
+  box-sizing: border-box;
+  max-width: 400px;
+  width: 100%; /* Ensures scalability up to max-width */
+  
+  /* Centering Logic */
+  margin: 2rem auto; /* Centers horizontally on the page with a small vertical gap */
+}
+
+/* Row configuration to align text and its specific copy button */
+.share-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Base text layout matching LetterCard font constraints */
+.share-card p {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  color: var(--text-body);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  text-align: left; /* Keeps the dynamic address text left-aligned inside rows */
+}
+
+/* Bold prefix labels to highlight keys */
+.share-card .label {
+  font-weight: bold;
+  color: var(--text-heading);
+  text-transform: uppercase;
+}
+
+/* Base styling rules for ALL buttons inside the card */
+.share-card button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+/* Copy Button Styling */
+.share-row button {
+  background-color: transparent;
+  color: var(--text-body);
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  min-width: 75px; 
+}
+
+/* Large Main Close Button Styling */
+.share-card .close-btn {
+  background-color: var(--accent);
+  color: white;
+  padding: 8px 14px;
+  margin-top: 8px;
+  align-self: stretch; 
+  text-transform: uppercase;
+}
+
+/* Hover Effects matching the classic LetterCard layout pop */
+.share-card button:hover {
+  background-color: var(--text-heading);
+  color: var(--bg-main); 
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0px var(--border);
+}
+
+/* Exception logic to keep Close button text white on hover */
+.share-card .close-btn:hover {
+  color: white;
+}
+
+/* Active pressed down animation states */
+.share-card button:active {
+  transform: translate(0, 0);
+  box-shadow: 0px 0px 0px var(--border);
+}

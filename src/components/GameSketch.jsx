@@ -236,10 +236,19 @@ const GameSketch = React.memo(({ activeModal, setActiveModal }) => {
   <div className="game-container-wrapper">
     {/* Game Canvas Mount Node */}
     <div ref={containerRef} />
-    {/* Reset Button */}
-    <button className="reset-sprite-pos" onClick={handleResetClick}>Reset Cat</button>
+    
+    {/* Bottom Button Action Bar */}
+    <div className="game-footer-actions">
+      <button className="retro-btn" onClick={handleResetClick}>Reset Cat</button>
+      
+      {userLoggedIn && (
+        <button className="retro-btn share-card-btn" onClick={() => { setActiveModal("SHARE_CARD") }}>
+          Share Card
+        </button>
+      )}
+    </div>
   </div>
-  );
+);
 });
 
 export default GameSketch;

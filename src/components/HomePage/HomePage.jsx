@@ -6,6 +6,7 @@ import DrawerPopUp from '../DrawerPopUp/DrawerPopUp';
 import PostCatPopUp from '../PostCatPopUp/PostCatPopUp';
 import NotificationBox from '../NotificationBox/NotificationBox';
 import SecretPopUp from '../SecretPopUp/SecretPopUp';
+import ShareCard from '../ShareCard/ShareCard';
 import WelcomePopUp from '../WelcomePopUp/WelcomePopUp';
 import { useAuth } from '../../contexts/authContext';
 import './HomePage.css'
@@ -55,6 +56,10 @@ const HomePage = () => {
         }}>
           {activeModal === "AUTH_REQUIRED" && (
             <AuthPopUp onClose={() => setActiveModal(null)} />
+          )}
+
+          {activeModal === "SHARE_CARD" && (
+            <ShareCard onClose={() => setActiveModal(null)} />
           )}
 
           {activeModal === "WRITE_COMPONENT" && (
