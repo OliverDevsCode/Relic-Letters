@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/authContext';
 import './SecretPopUp.css';
+import {sendLetter } from '../../utils/userDB';
 
 const SecretPopUp = ({onClose}) => {
 
@@ -16,6 +17,12 @@ const SecretPopUp = ({onClose}) => {
       const fanfare = new Audio('./audio/fanfare.mp3');
       fanfare.volume = 0.4;
       fanfare.play();
+    }else{
+      const fanfare = new Audio('./audio/fanfare.mp3');
+      fanfare.volume = 0.4;
+      fanfare.play();
+      const message = {title: "HEY WHAT ARE YOU DOING HERE",body:"Congratulations on finding the relic of ruins! I hope you enjoy the experience and happy writing!"}
+      setHiddenMessage(message);
     }
   },[])
 
